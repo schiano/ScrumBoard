@@ -18,7 +18,7 @@ exports.config = {
 
   // list of files / patterns to load in the browser
   suites: {
-    main: 'e2e/main/*.spec.js'
+    main: 'e2e/main/*.spec.js',
     connexion: 'tests/e2e/connexion/*.spec.js',
     inscription: 'tests/e2e/inscription/*.spec.js'
   },
