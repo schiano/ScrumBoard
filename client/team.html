@@ -1,0 +1,13 @@
+<div class="col-md-6">
+    <div class="row">
+        <p class="section-title col-md-8"><label class="sky-blue pointer position-left" id="btn_new_user" onclick="show_popup_team()">Ajouter</label>Membres</p>
+        <p class="section-title col-md-4">Fonction</p> 
+        
+        <div class="section-content col-md-12">
+            <div ng-repeat="membre in projects[current_project]['users']">
+              <p class="col-md-8"><i class="fa fa-close red pointer position-left" ng-click="removeMembre($index)"></i>{{membre.name}}</p>
+              <p class="col-md-4">{{membre.role}}</p>
+            </div>
+        </div>				
+    </div>
+</div>
