@@ -1,0 +1,339 @@
+/*========================== FONTS ==========================*/
+
+@font-face { 
+    font-family: 'Raleway';
+    src: url('../fonts/Raleway/Raleway.ttf');
+}
+
+@font-face { 
+    font-family: 'Raleway-MediumItalic';
+    src: url('../fonts/Raleway/Raleway-MediumItalic.ttf');
+}
+
+@font-face { 
+    font-family: 'Raleway-Thin';
+    src: url('../fonts/Raleway/Raleway-Thin.ttf');
+}
+
+/* ======================== CONTENT ========================*/
+
+html{
+	margin-top: 0px;
+	font-family: 'Raleway-Thin';
+	height: 100%;
+	overflow-x: hidden;
+}
+
+body{
+	margin-top: 0px;
+	//background: url("../../assets/images/background/violate.jpg");
+	background: url("../../assets/images/background/blue.jpg");
+	//background: url("../../assets/images/background/city.jpg");
+	//background: url("../../assets/images/background/kiwi.jpg");
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	height: 150%;
+}
+
+#sub-body{
+	height : 100%;
+	width : 100%;
+	z-index : 2;
+}
+
+.sub-body-blur{
+	background:rgba(255,255,255,0.1);	
+	-webkit-filter: blur(10px); /* Chrome, Opera, etc. */
+	/*filter: url('http://jordanhollinger.com/media/blur.svg#blur');*/
+	filter: blur(10px); /* Firefox 35+, eventually all */
+}
+
+.page-content{
+	margin-top: 0px;
+	height: 100%;
+}
+
+.header{
+	margin-top: -35px;
+	width: 100%;
+	border-bottom: 1px rgba(200,200,200,0.6) solid;
+}
+
+@media screen and (max-width: 992px) {
+	.user-section{
+		display: none;
+	}
+}
+
+.left-panel{
+	background: rgba(0,0,0,0.3);
+	height: 100%;
+	padding: 20px 0px 0px 0px;
+}
+
+.display-none{
+	display:none;
+}
+
+/*===================== TEXT =============================*/
+
+h1{
+	font-family: 'Raleway';
+	color: white;
+	font-size: 30px;
+}
+
+
+h2{
+	font-family: 'Raleway-MediumItalic';
+	color: white;
+	font-size: 24px;
+}
+
+h3{
+	font-family: 'Raleway-MediumItalic';
+	color: white;
+	font-size: 14px;
+}
+
+h4{
+	font-family: 'Raleway-Thin';
+	color: white;
+	font-size: 34px;	
+}
+
+h5{
+	font-family: 'Raleway';
+	color: white;
+	font-size: 24px;	
+}
+
+.align-center{
+	text-align: center;
+}
+
+.text-thin{
+	font-family: 'Raleway-Thin';
+}
+
+.uppercase{
+	text-transform:uppercase;
+}
+
+/*===================== BACKGROUND =====================*/
+
+.background_black_transparent{
+	background:rgba(30,30,30,0.4);
+	border-right:2px rgb(0,102,255) solid;	
+}
+
+/*===================== FONT SIZE =====================*/
+
+.font-size-40px{
+	font-size: 40px;
+}
+
+.font-size-70px{
+	font-size: 70px;
+}
+
+/*===================== POSITION =========================*/
+
+.margin-top-10px{
+	margin-top:10px;
+}
+
+.margin-top-15px{
+	margin-top:15px;
+}
+
+.margin-top-20px{
+	margin-top:20px;
+}
+
+.margin-top-25px{
+	margin-top:25px;
+}
+
+.margin-top-30px{
+	margin-top:30px;
+}
+
+.margin-left-5px{
+	margin-left:5px;
+}
+
+.vertical-align-middle{
+	vertical-align: middle;
+}
+
+/*===================== PADDING =========================*/
+
+.padding-left-10{
+	padding-left: 10px;
+}
+
+/*===================== HEIGHT & WIDTH =====================*/
+
+.width-100px{
+	width: 100px;
+}
+
+.height-100px{
+	height: 100px;
+}
+
+/*===================== OTHER ==========================*/
+
+.inline-box{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+.position-left{
+	position: absolute;
+	left: 5px;
+}
+
+.avatar-circle{
+	border-radius: 50%;
+	//border:5px #481321 solid; /* red */
+	//border:5px #2d4d2d solid; /* green */
+	border: 5px #152939 solid;
+	width: 50%;
+}
+
+.circle{
+	border-radius: 50%;
+}
+
+.section-title{
+	position:relative;
+	top: 10px;
+	padding: 2px;
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+	text-align: center;
+	font-size: 16px;
+	font-family: 'Raleway-MediumItalic';
+}
+
+.section-content{
+	position:relative;
+	top: 10px;
+	padding: 5px;
+	background: rgba(0,0,0,0.2);
+	color: #fff;
+	text-align: center;
+	font-size: 16px;
+}
+
+.vertical-section{
+	height:300px;
+}
+
+.transparent-section{
+	font-family: 'Raleway-Thin';
+	padding: 5px;
+	border-bottom: 1px rgba(200,200,200,0.6) solid;
+	color: #fff;
+	font-size: 20px;
+}
+
+.progress{
+	position: relative;
+	top:0px;
+}
+
+.progress-small {
+    height: 4px;
+    width: 80%;
+}
+
+.project_box{
+	//margin-top:-10px;
+	//padding:5px;	
+}
+
+.box-task{
+	padding: 5px;
+	border-radius: 5px;
+	//background: rgba(209,75,63,0.6); /* red / orange */
+	//background: rgba(173,89,112,0.6); /* purple */
+	//background: rgba(186,0,0,0.5); /* red */
+	//background: rgba(239,127,72,0.6); /* orange */
+	//background: rgba(45,77,45,0.6); /* green dark */
+	//background: rgba(21,41,57,0.6); /* blue */
+	background: rgba(0,0,0,0.4); /* blue */
+	cursor: pointer;
+	margin-top: 5px;
+	list-style: none;
+}
+
+.box-button{
+	margin-top: 10px;
+	margin-right: 5px;
+	padding: 5px;
+	width: 70px;
+	display:inline-block;
+	vertical-align: top;
+	text-align: center;
+	background: rgba(0,0,0,0.6);
+	color:white;
+	cursor: pointer;
+}
+
+.box-button:hover{
+	background: rgba(0,0,0,0.3);
+}
+
+.box-button i{
+	font-size: 40px;
+}
+
+/* ============================ CHART ========================== */
+
+#canvas{
+	position: relative;
+	top:10px;
+}
+
+/* ============================ POPUP ============================ */
+
+#popup-team, #popup-project{
+	width:20%;
+	top: 40%;
+	left: 40%;
+}
+
+#popup-us{
+	top: 35%;
+	left: 30%;
+}
+
+.popup{
+	z-index:3;
+	position: fixed;
+	background: rgba(255,255,255,1);
+	border-radius: 5px;
+	border: 1px #eee solid;
+	box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+	padding: 10px;
+	text-align: center;
+	color: #333;
+	font-family: "Raleway-MediumItalic";
+}
+
+/* ============================ BOXES ============================ */
+
+.white-box{
+	background: white;
+	padding: 20px;
+	border: 1px #aaa solid;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+	width: 25%;
+}
