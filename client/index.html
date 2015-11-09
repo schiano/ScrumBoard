@@ -1,61 +1,87 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <base href="/">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(client) app/vendor.css -->
-      <!-- bower:css -->
-      <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,client}) app/app.css -->
-    <link rel="stylesheet" href="app/app.css">
-      <!-- injector:css -->
-      <!-- endinjector -->
-    <!-- endbuild -->
-  </head>
-  <body ng-app="scrumBoardApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<html lang="en">
 
-    <!-- Add your site or application content here -->
-    <div ng-view=""></div>
+<head>
+  <meta charset="utf-8" />
+  <title>ScrumBoard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content=""/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="fr" http-equiv="Content-Language"/>
+  <link rel="shortcut icon" href="images/icon/favicon.jpg" type="image/x-icon"/>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <!-- BOOTSTRAP STYLESHEETS -->
+  <link rel="stylesheet" href="app/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="app/css/bootstrap-theme.min.css"/>
+  <link rel="stylesheet" href="app/css/bootstrap-wysihtml5.css"/>
 
-      ga('create', 'UA-XXXXX-X');
-      ga('send', 'pageview');
-    </script>
+  <!-- FONT AWESOME STYLESHEETS -->
+  <link rel="stylesheet" href="app/css/font-awesome.min.css"/>
 
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-    <!-- build:js({client,node_modules}) app/vendor.js -->
-      <!-- bower:js -->
-      <!-- endbower -->
-      <script src="socket.io-client/socket.io.js"></script>
-    <!-- endbuild -->
+  <!-- CALENDAR STYLESHEET -->
+  <link rel="stylesheet" href="app/css/calendar.css"/>
 
-        
-        <!-- build:js({.tmp,client}) app/app.js -->
-        
-        <script src="app/app.js"></script>
-          <!-- injector:js -->
-          <!-- endinjector -->
-        <!-- endbuild -->
+  <!-- THEME STYLESHEETS -->
+  <link rel="stylesheet" href="app/css/app.css"/>
+  <link rel="stylesheet" href="app/css/color.css"/>
+
+</head>
+
+<body ng-app="scrumBoardApp" ng-controller="MainCtrl">
+  <h1 class="align-center">ScrumBoard</h1>
+  <h4 class="align-center margin-top-30px">Gérez vos projets informatique de A à Z</h4>
+  <h5 class="align-center margin-top-30px">Connectez vous !</h5>
+  
+  <center>
+    <div id="login_section">
+      <div id="mail_section" class="white-box margin-top-30px">
+        <div class="circle background-ddd width-100px height-100px vertical-align-middle"><i class="fa fa-user font-size-70px margin-top-10px color-aaa"></i></div>
+        <input type="text" id="mail_field_login" ng-model="$parent.mail_field_login" placeholder="Adresse mail" class="form-control margin-top-30px"/>
+        <input type="password" id="password_field_login" ng-model="$parent.password_field_login" placeholder="Mot de passe" class="form-control margin-top-30px"/>
+        <h3 id="error_mail_login" class="red"><i class="fa fa-warning"></i> Adresse mail inconnu.</h3>
+        <h3 id="invalid_mail_login" class="red"><i class="fa fa-warning"></i> Adresse mail invalide.</h3>
+        <h3 id="error_password_login" class="red"><i class="fa fa-warning"></i> Mauvais mot de passe.</h3><br/>
+        <button id="next_button" class="btn btn-info margin-top-10px" ng-click="check_login()">Connection</button>
+      </div>
+
+      <h3 id="link_make_account" onclick="account()" class="pointer">Créer un compte</h3>
+    </div>
+
+    <div id="account_section">
+      <div class="white-box margin-top-30px">
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" id="first_name_registration" ng-model="first_name_registration" placeholder="Prénom" class="form-control margin-top-30px"/>
+          </div>
+          <div class="col-md-6">
+            <input type="text" id="last_name_registration" ng-model="last_name_registration" placeholder="Nom" class="form-control margin-top-30px col-md-6"/>
+          </div>
+        </div>
+        <input type="mail" id="mail_field_registration" ng-model="mail_field_registration" placeholder="Address Mail" class="form-control margin-top-10px"/>
+        <h3 id="error_mail_registration" class="red"><i class="fa fa-warning"></i> Adresse mail déja utilisé.</h3><br/>
+        <input type="password" id="password_field_registration" ng-model="password_field_registration" placeholder="Mot de passe" class="form-control margin-top-10px"/>
+        <input type="password" id="confirm_password_field_registration" ng-model="confirm_password_field_registration" placeholder="Confirmation" class="form-control margin-top-10px"/>
+        <h3 id="error_confirmation_registration" class="red"><i class="fa fa-warning"></i> Erreur de confirmation.</h3><br/>
+        <button id="registration_button" class="btn btn-info margin-top-10px" ng-click="makeAccount()">Créer</button>
+      </div>
+
+      <h3 id="link_login" onclick="login()" class="pointer">Connectez vous</h3>
+    </div>
+
+  </center>
+
 </body>
+
+<!-- INCLUDE ANGULAR -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+
+<!-- INCLUDE THE LATEST VERSION OF JQUERY -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<!-- ANGULAR APP -->
+<script type="text/javascript" src="app/js/app.js"></script>
+
+<!-- INDEX SCRIPT -->
+<script type="text/javascript" src="app/js/index.js"></script>
+
 </html>
