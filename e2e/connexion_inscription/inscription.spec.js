@@ -29,7 +29,7 @@ describe('Inscription test suit', function() {
     expect(curTitle == browser.getTitle()).toBeFalsy();
   });*/
 
-  it('should fail to make a new account by using an already used mail address', function() {
+  it('should fail to make a new account by writing two different passwords', function() {
     // The "Créer un compte" link should be present
     expect(element(by.id('link_make_account')).isDisplayed()).toBeTruthy();
 
@@ -39,7 +39,7 @@ describe('Inscription test suit', function() {
     // Filling the formular
     element(by.id('first_name_registration')).sendKeys("Jean");
     element(by.id('last_name_registration')).sendKeys("Blaguin");
-    element(by.id('mail_field_registration')).sendKeys("");
+    element(by.id('mail_field_registration')).sendKeys("new@test.com");
     element(by.id('password_field_registration')).sendKeys("rire");
     element(by.id('confirmation_field_registration')).sendKeys("error");
 
@@ -60,7 +60,7 @@ describe('Inscription test suit', function() {
     // Filling the formular
     element(by.id('first_name_registration')).sendKeys("Jean");
     element(by.id('last_name_registration')).sendKeys("Blaguin");
-    element(by.id('mail_field_registration')).sendKeys("default");
+    element(by.id('mail_field_registration')).sendKeys("test@test.com");
     element(by.id('password_field_registration')).sendKeys("rire");
     element(by.id('confirmation_field_registration')).sendKeys("rire");
 
