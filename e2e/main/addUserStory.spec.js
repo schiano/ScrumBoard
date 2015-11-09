@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Add project Test Suit', function() {
+describe('Add user story Test Suit', function() {
 	var page;
 
 	beforeEach(function () {
@@ -9,10 +9,12 @@ describe('Add project Test Suit', function() {
     page.connectWithDefaultUser();
 	});
 
-	it('should add a project', function() {
+	it('should add a user story', function() {
 
   	page.clickAddProject();
-  	page.setName('Project');
+  	page.setName('US');
+    page.priority('3');
+    page.difficulty('5');
   	page.addBtn.click();
 
   	// The new project should be present.
