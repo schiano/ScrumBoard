@@ -337,3 +337,53 @@ h5{
 	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 	width: 25%;
 }
+
+
+/* ===================== BACKGROUND ==================== */
+
+.background-red{
+	background: #d34541;
+}
+
+.background-dark-green{
+	background: #004d40;
+}
+
+.background-green{
+	background: #17b881;
+}
+
+.background-blue{
+	background: #2f97b6;
+}
+
+.background-orange{
+	background: #ed8b34;
+} 
+
+.background-ddd{
+	background: #ddd;
+}
+
+
+/* ======================= COLOR ====================== */
+
+.white{
+	color: white;
+}
+
+.red{
+	color: red;
+}
+
+.green{
+	color: #17b881;
+}
+
+.sky-blue{
+	color : #2cacd3;
+}
+
+.color-aaa{
+	color: #aaa;
+}
