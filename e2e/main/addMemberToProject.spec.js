@@ -6,6 +6,7 @@ describe('Add member to project Test Suit', function() {
 	beforeEach(function () {
 		browser.get('/');
 		page = require('./main.po');
+		page.connectWithDefaultUser();
 	});
 
 	it('should add an existing member to the project', function() {

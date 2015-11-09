@@ -14,6 +14,11 @@ var MainPage = function() {
     element(by.id("del_us_"+id)).click();
   };
 
+  this.connectWithDefaultUser = function() {
+    // Default user : test@test.com
+    // Password     : test
+  }
+
   this.clickAddMember = function() {
     newMemberBtn.click();
 
