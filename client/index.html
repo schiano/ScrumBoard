@@ -51,16 +51,16 @@
       <div class="white-box margin-top-30px">
         <div class="row">
           <div class="col-md-6">
-            <input type="text" id="first_name_registration" ng-model="first_name_registration" placeholder="Prénom" class="form-control margin-top-30px"/>
+            <input type="text" id="first_name_registration" ng-model="$parent.first_name_registration" placeholder="Prénom" class="form-control margin-top-30px"/>
           </div>
           <div class="col-md-6">
-            <input type="text" id="last_name_registration" ng-model="last_name_registration" placeholder="Nom" class="form-control margin-top-30px col-md-6"/>
+            <input type="text" id="last_name_registration" ng-model="$parent.last_name_registration" placeholder="Nom" class="form-control margin-top-30px col-md-6"/>
           </div>
         </div>
-        <input type="mail" id="mail_field_registration" ng-model="mail_field_registration" placeholder="Address Mail" class="form-control margin-top-10px"/>
+        <input type="mail" id="mail_field_registration" ng-model="$parent.mail_field_registration" placeholder="Address Mail" class="form-control margin-top-10px"/>
         <h3 id="error_mail_registration" class="red"><i class="fa fa-warning"></i> Adresse mail déja utilisé.</h3><br/>
-        <input type="password" id="password_field_registration" ng-model="password_field_registration" placeholder="Mot de passe" class="form-control margin-top-10px"/>
-        <input type="password" id="confirm_password_field_registration" ng-model="confirm_password_field_registration" placeholder="Confirmation" class="form-control margin-top-10px"/>
+        <input type="password" id="password_field_registration" ng-model="$parent.password_field_registration" placeholder="Mot de passe" class="form-control margin-top-10px"/>
+        <input type="password" id="confirm_password_field_registration" ng-model="$parent.confirm_password_field_registration" placeholder="Confirmation" class="form-control margin-top-10px"/>
         <h3 id="error_confirmation_registration" class="red"><i class="fa fa-warning"></i> Erreur de confirmation.</h3><br/>
         <button id="registration_button" class="btn btn-info margin-top-10px" ng-click="makeAccount()">Créer</button>
       </div>
@@ -78,10 +78,10 @@
 <!-- INCLUDE THE LATEST VERSION OF JQUERY -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
-<!-- ANGULAR APP -->
-<script type="text/javascript" src="app/js/app.js"></script>
-
 <!-- INDEX SCRIPT -->
 <script type="text/javascript" src="app/js/index.js"></script>
+
+<!-- ANGULAR APP -->
+<script type="text/javascript" src="app/js/app.js"></script>
 
 </html>
