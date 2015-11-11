@@ -24,12 +24,6 @@
 		<!-- THEME STYLESHEETS -->
 		<link rel="stylesheet" href="app/css/app.css"/>
 		<link rel="stylesheet" href="app/css/color.css"/>
-		
-		<!-- POPUP SCRIPT -->
-		<!-- <script type="text/javascript">
-			$('#popup-team').hide();
-			$('#popup-us').hide();
-		</script> -->
 
 </head>
 
@@ -58,7 +52,7 @@
     
                 <div class="circle background-dark-green width-100px height-100px vertical-align-middle"><label class="font-size-40px margin-top-25px white text-thin">{{user['name'][0]}}</label></div>
             
-                <h2>{{user['FirstName']}}</h2>
+                <h2>{{user['name']}}</h2>
     
                 <p class="section-title">Projets En Cours</p>
     
@@ -72,14 +66,14 @@
                     </div>
                 </div>
                 <!-- END PROJECT LIST -->
-                <button class="btn btn-info" id="btn_new_project" onClick="show_popup_project()">Nouveau</button>
+                <button class="btn btn-info margin-top-10px" id="btn_new_project" onClick="show_popup_project()">Nouveau</button>
     
             </center>
          </div>
          <!-- END LEFT PANEL -->
     
-         <!-- START RIGHT PANEL -->
-         <div class="col-md-10">
+         <!-- START DASHBOARD PANEL -->
+         <div id="dashboard" class="col-md-10 display-none">
     
             <div class="row">
                 <div class="col-md-12">
@@ -120,7 +114,12 @@
             <!-- ####################### END PAGE CONTENT ####################### -->
                 
          </div>
-         <!-- END RIGHT PANEL -->
+         <!-- END DASHBOARD PANEL -->
+         
+         <div id="dashboard-empty" class="col-md-10">
+         	<p>Aucun projet</p>
+         </div>
+         
         </div>
 	</div>
 </body>
