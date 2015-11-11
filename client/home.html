@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" ng-app="scrumBoardApp" ng-controller="HomeCtrl">
+
+<head>
+		<meta charset="utf-8" />
+		<title>ScrumBoard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content=""/>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+		<meta content="fr" http-equiv="Content-Language"/>
+		<link rel="shortcut icon" href="images/icon/favicon.jpg" type="image/x-icon"/>
+		
+		<!-- BOOTSTRAP STYLESHEETS -->
+		<link rel="stylesheet" href="app/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="app/css/bootstrap-theme.min.css"/>
+		<link rel="stylesheet" href="app/css/bootstrap-wysihtml5.css"/>
+		
+		<!-- FONT AWESOME STYLESHEETS -->
+		<link rel="stylesheet" href="app/css/font-awesome.min.css"/>
+		
+		<!-- CALENDAR STYLESHEET -->
+		<link rel="stylesheet" href="app/css/calendar.css"/>
+		
+		<!-- THEME STYLESHEETS -->
+		<link rel="stylesheet" href="app/css/app.css"/>
+		<link rel="stylesheet" href="app/css/color.css"/>
+		
+		<!-- POPUP SCRIPT -->
+		<!-- <script type="text/javascript">
+			$('#popup-team').hide();
+			$('#popup-us').hide();
+		</script> -->
+
+</head>
+
+<body>
+	<div id="sub-body">
+        <!-- START HEADER -->
+        <div class="header">
+         <div class="row">
+            <div class="col-md-2 left-panel">
+                <center>
+                 <h1>ScrumBoard</h1>
+                </center>
+            </div>
+            <div class="col-md-10">
+    
+            </div>
+         </div>
+        </div>
+        <!-- END HEADER -->
+    
+        <div class="row page-content">
+    
+         <!-- START LEFT PANEL -->
+         <div class="col-md-2 left-panel user-section">
+            <center>
+    
+                <div class="circle background-dark-green width-100px height-100px vertical-align-middle"><label class="font-size-40px margin-top-25px white text-thin">{{user['name'][0]}}</label></div>
+            
+                <h2>{{user['FirstName']}}</h2>
+    
+                <p class="section-title">Projets En Cours</p>
+    
+                <!-- START PROJECT LIST -->
+                <div ng-repeat="project in projects" id="project_{{$index}}" class="project_box"> 
+                    <h3 ng-click="switchProject($index)" class="pointer">{{project.name}}</h3>
+                    <div class="progress progress-small">
+                         <label href="#" data-toggle="tooltip" title="" class="progress-bar tooltips {{project.style}}" style="width: {{project.state}}%;" data-original-title="{{project.state}}%">
+                         <span class="sr-only">{{project.state}}% Complete</span>
+                         </label>
+                    </div>
+                </div>
+                <!-- END PROJECT LIST -->
+                <button class="btn btn-info" id="btn_new_project" onClick="show_popup_project()">Nouveau</button>
+    
+            </center>
+         </div>
+         <!-- END LEFT PANEL -->
+    
+         <!-- START RIGHT PANEL -->
+         <div class="col-md-10">
+    
+            <div class="row">
+                <div class="col-md-12">
+                 <div class="transparent-section">
+                    <label>DASHBOARD</label>
+                 </div>
+                </div>
+            </div>
+    
+            <!-- ####################### START BUTTON SECTION ####################### -->
+            <div class="row container">
+                <div class='box-button' ng-click="clic_button('team.html')">
+                 <i class="fa fa-group"></i><br/>
+                 <small>Team</small>
+                </div>
+                        
+                <div class='box-button' ng-click="clic_button('backlog.html')">
+                 <i class="fa fa-th-list"></i><br/>
+                 <small>Backlog</small>
+                </div>
+                        
+                        <div class='box-button' ng-click="clic_button('kanban.html')">
+                 <i class="fa fa-trello"></i><br/>
+                 <small>KanBan</small>
+                </div>
+                        
+                <div class='box-button' ng-click="clic_button('pert.html')">
+                 <i class="fa fa-line-chart"></i><br/>
+                 <small>Pert</small>
+                </div>  
+            </div>
+                    
+            <!-- ####################### END BUTTON SECTION ####################### -->
+    
+            <!-- ####################### START PAGE CONTENT ####################### -->
+            <div id="page" ng-include src="content_page" class="row container">
+            </div>
+            <!-- ####################### END PAGE CONTENT ####################### -->
+                
+         </div>
+         <!-- END RIGHT PANEL -->
+        </div>
+	</div>
+</body>
+
+<!-- START POPUP US -->
+<div id="popup-us" class="popup display-none">
+    <p>Nouvelle User Story</p>
+    <input type="text" class='inline-box form-control margin-top-10px' placeholder="Title" id="new_us_title" ng-model="new_us_title"/>
+    <input type="text" class='inline-box form-control margin-top-10px' placeholder="Ordre (exemple : 1)" id="new_us_order" ng-model="new_us_order"/>
+    <input type="text" class='inline-box form-control margin-top-10px' placeholder="Priorité (exemple : 1)" id="new_us_priority" ng-model="new_us_priority"/>
+    <input type="text" class='inline-box form-control margin-top-10px' placeholder="Difficulté (exemple : 3)" id="new_us_difficulty" ng-model="new_us_difficulty"/>
+    <h3 id="error_backlog" class="red"><i class="fa fa-warning"></i> Formulaire incomplet.</h3>
+    <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_backlog_popup" onclick="hide_popup_us()">Cancel</buton>
+    <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_backlog_popup" ng-click="addUs()">Add</buton>
+</div>
+<!-- END POPUP US -->
+
+<!-- START POPUP TEAM -->
+<div id="popup-team" class="popup display-none">	
+    <p>Nouveau Membre</p>
+    <input type="text" class='inline-box form-control' placeholder="Email" id="new_membre_name" ng-model="new_membre_name"/>
+    <h3 id="error_mail_unknown_user" class="red"><i class="fa fa-warning"></i> Utilisateur inconnu.</h3>
+    <h3 id="error_mail_empty_user" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
+    <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_user_popup" onclick="hide_popup_team()">Cancel</buton>
+    <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_user" ng-click="addMembre()">Add</buton>
+</div>
+<!-- END POPUP TEAM -->
+
+<!-- START POPUP PROJECT -->
+<div id="popup-project" class="popup display-none">	
+		<p>Nouveau Projet</p>
+		<input type="text" class='inline-box form-control' placeholder="Nom" id="new_project_name" ng-model="new_project_name"/>
+    	<h3 id="error_name_project" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
+		<button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_project_popup" onclick="hide_popup_project()">Cancel</button>
+		<button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_project" ng-click="addProject()">Add</button>
+</div>
+<!-- END POPUP PROJECT -->
+
+<!-- INCLUDE ANGULAR -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+
+<!-- INCLUDE THE LATEST VERSION OF JQUERY -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<!-- ANGULAR APP -->
+<script type="text/javascript" src="app/js/app.js"></script>
+
+<!-- CALENDAR -->
+<script type="text/javascript" src="app/js/calendar.min.js"></script>
+
+<!-- Charts -->
+<script type="text/javascript" src="app/js/chart.js"></script>
+<script type="text/javascript" src="app/js/line-chart.js"></script>
+<script type="text/javascript" src="app/js/pie-chart.js"></script>
+
+<!-- INCLUDE JQUERY UI-->
+<script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<!-- PERT SCRIPT -->
+<script type="text/javascript" src="app/js/GO_JS/go.js"></script>
+<script type="text/javascript" src="app/js/pert.js"></script>
+
+<!-- HOME SCRIPT -->
+<script type="text/javascript" src="app/js/home.js"></script>
+
+
+</html>
