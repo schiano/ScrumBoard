@@ -1,3 +1,5 @@
+'use strict';
+
 <!-- ERROR FORM  -->
 
 //function error mail login
