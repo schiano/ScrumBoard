@@ -78,10 +78,38 @@ function show_popup_us(){
 	$('#popup-us').removeClass('display-none');
 }
 
+function show_edit_popup_us(index){
+	var scope = angular.element($('body')).scope();
+	$('#sub-body').addClass('sub-body-blur');
+	$('#popup-us').removeClass('display-none');
+	
+	$('#new_us_title').val(scope.current_backlog[index]['name']);
+	scope.new_us_title = scope.current_backlog[index]['name'];
+	$('#new_us_order').val(scope.current_backlog[index]['order']);
+	scope.new_us_order = scope.current_backlog[index]['order'];
+	$('#new_us_priority').val(scope.current_backlog[index]['priority']);
+	scope.new_us_priority = scope.current_backlog[index]['priority'];
+	$('#new_us_difficulty').val(scope.current_backlog[index]['difficulty']);
+	scope.new_us_difficulty = scope.current_backlog[index]['difficulty'];
+	$('#new_us_sprint').val(scope.current_backlog[index]['sprint']);
+	scope.new_us_sprint = scope.current_backlog[index]['sprint'];
+	
+	scope.edit_us_number = index;
+}
+
 function hide_popup_us(){
 	hide_all_errors();
 	$('#sub-body').removeClass('sub-body-blur');
 	$('#popup-us').addClass('display-none');
+	clear_us_form();
+}
+
+function clear_us_form(){
+	$('#new_us_title').val('');
+	$('#new_us_order').val('');
+	$('#new_us_priority').val('');
+	$('#new_us_difficulty').val('');
+	$('#new_us_sprint').val('');
 }
 
 /* GRANULARITY CHART */
