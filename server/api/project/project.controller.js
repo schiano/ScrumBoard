@@ -11,7 +11,7 @@ exports.index = function(req, res) {
 };
 
 exports.indexId = function(req, res) {
-  Project.findOne({"members.userId" :req.params.userId},function (err, projects) {
+  Project.find({"members.userId" :req.params.userId},function (err, projects) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(projects);
   });
