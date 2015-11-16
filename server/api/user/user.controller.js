@@ -20,6 +20,19 @@ exports.index = function(req, res) {
 	});
 };
 
+exports.search = function(req, res) {
+	var query = {};
+	if(req.query.email){
+		query = {"email":req.query.email};
+		User.find(query, "-salt -hashedPassword", function (err, users) {
+			if(err) return res.status(500).send(err);
+			res.status(200).json(users);
+		});
+	} else {
+		res.status(403).send("Forbidden");
+	}
+};
+
 /**
  * Creates a new user
  */
