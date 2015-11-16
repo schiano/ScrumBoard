@@ -29,7 +29,16 @@ var ProjectSchema = new Schema({
 	  type: Boolean, required: true
 	  },
   backlog: {
-	  type: String
+	  type: [String]
+  },
+  sprints: {
+	  type: [
+		  {
+			_id:false,
+		  	sprintNumber: Number,
+		  	tasks: [String]
+		  }
+	  ]
   },
   progress: {
 	  type: Number
