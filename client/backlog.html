@@ -6,20 +6,29 @@
     <!-- <p class="section-title col-md-12">Backlog</p> -->
 
     <!-- START HEADER BCKLOG  -->
-    <p class="section-title col-md-6"><label class="sky-blue pointer position-left" id="new_us" onclick="show_popup_us()">Ajouter</label>Users Stories</p>
-    <p class="section-title col-md-2">Ordre</p>
-    <p class="section-title col-md-2">Priorité</p>
-    <p class="section-title col-md-2">Difficultés</p>
+    <p class="section-title col-md-1 sky-blue pointer" id="new_us" onclick="show_popup_us()">Ajouter</p>
+    <p class="section-title col-md-1">ID</p>
+    <p class="section-title col-md-6">Users Stories</p>
+    <p class="section-title col-md-1">Ordre</p>
+    <p class="section-title col-md-1">Priorité</p>
+    <p class="section-title col-md-1">Difficultés</p>
+    <p class="section-title col-md-1">Sprint</p>
     <!-- END HEADER BACKLOG -->
 
     <!-- START BACKLOG CONTENT -->
     <div class="section-content col-md-12">
       
-      <div ng-repeat="us in current_backlog">
-         <p class="col-md-6 pointer"><i class="fa fa-close red pointer position-left" id='del_us_{{$index}}' ng-click="removeUs($index)"></i>{{us['name']}}</p>
-         <p class="col-md-2">{{us['order']}}</p>
-         <p class="col-md-2">{{us['priority']}}</p>
-         <p class="col-md-2">{{us['difficulty']}}</p>
+      <div ng-repeat="us in current_backlog | orderBy:'sprint'">
+         <p class="col-md-1">
+         	<i class="fa fa-close red pointer position-del" id='del_us_{{getUsIndex(us['name'])}}' ng-click="removeUs(getUsIndex(us['name']))"></i>
+            <i class="fa fa-edit green pointer position-edit" id='edit_us_{{getUsIndex(us['name'])}}' onclick="show_edit_popup_us({{getUsIndex(us['name'])}})"></i>
+         </p>
+         <p class="col-md-1">{{us['ID']}}</p>
+         <p class="col-md-6 pointer">{{us['name']}}</p>
+         <p class="col-md-1">{{us['order']}}</p>
+         <p class="col-md-1">{{us['priority']}}</p>
+         <p class="col-md-1">{{us['difficulty']}}</p>
+         <p class="col-md-1">{{us['sprint']}}</p>
       </div>
 
     </div>
