@@ -75,6 +75,7 @@ app.controller('MainCtrl',function($rootScope, $http){
 				$http.post('api/users/', new_user).
 				success(function(data) {
 					$rootScope.user = data;
+					sessionStorage.user = JSON.stringify(data);
 					document.location.href='home.html';
 				}).
 				error(function(resultat, statut, erreur){
@@ -91,8 +92,8 @@ app.controller('MainCtrl',function($rootScope, $http){
 	}
 	
 	$rootScope.initLoginRegistrattionForm = function(){
-		$rootScope.mail_field_login = 'admin@admin.com';
-		$rootScope.password_field_login = 'admin';
+		$rootScope.mail_field_login = 'schaerer.thibaut@gmail.com';
+		$rootScope.password_field_login = 'titi';
 		
 		$rootScope.first_name_registration = '';
 		$rootScope.last_name_registration = '';
@@ -114,17 +115,30 @@ app.controller('HomeCtrl', function($scope, $http){
 	
 	//user connected
 	$scope.user = JSON.parse(sessionStorage.user);
+	//alert(sessionStorage.user);
 	$scope.token = JSON.parse(sessionStorage.token);
 	
 	// =============== CONTENT PAGE SECTION ===============
 	
 	$scope.content_page = 'team.html';
+	$scope.content_section = 'team';
 	
 	//switch content
-	$scope.clic_button = function(page){
+	$scope.clic_button = function(section){
+		
+		//remove button active
+		$('#btn-' + $scope.content_section).removeClass('box-button-active');
+		$('#btn-' + $scope.content_section).addClass('box-button-no-active');
+		
+		//switch page
 		$('#page').hide();
-		$scope.content_page = page;
+		$scope.content_page = section + ".html";
+		$scope.content_section = section;
 		$('#page').show('slide', { direction: 'right' });
+		
+		//add button active
+		$('#btn-' + section).addClass('box-button-active');
+		$('#btn-' + section).removeClass('box-button-no-active');
 	}
 	
 	// ====================== TEAM SECTION ====================
@@ -146,19 +160,19 @@ app.controller('HomeCtrl', function($scope, $http){
 	$scope.addMembre = function(){
 		if($scope.new_membre_name != undefined){
 			//we fetch the user
-			$http.get('api/users/' + $scope.new_membre_name,{ 
-			headers: {'Authorization' : 'Bearer ' + data['token']}}).
+			$http.get('api/users/search?email=' + $scope.new_membre_name,{ 
+			headers: {'Authorization' : 'Bearer ' + $scope.token}}).
 			success(function(data) {
 				//we add the user
 				var new_member_json = {'userId' : data['_id'],
-									   'name' : data['email'],
-									   'canEdit' : $('#user_right').val()}
-				$scope.projects[$scope.current_project]['users'].push(new_member_json);
+									   'name' : $scope.new_membre_name,
+									   'canEdit' : $('#user_right').val()};
+				$scope.projects[$scope.current_project]['members'].push(new_member_json);
 				$scope.initPopupAddMember();
 			}).
 			error(function(resultat, statut, erreur){
-					alert(JSON.stringify(resultat,null,4));
-			}.bind(this));
+				alert(JSON.stringify(resultat,null,4));
+			});
 		}
 		else
 			show_error_mail_empty_user()
@@ -213,7 +227,13 @@ app.controller('HomeCtrl', function($scope, $http){
 						  'priority' : $scope.new_us_priority, 
 						  'difficulty' : $scope.new_us_difficulty,
 						  'sprint' : $scope.new_us_sprint,
-						  'dependencies' : null };
+						  'dependencies' : null,
+						  'tasks_id' :  $scope.tasks.length};
+						  
+			var taks_list = {'id' : $scope.tasks.length,
+					 		 'tasks' : [] };
+			
+			$scope.tasks.push(taks_list);
 		  
 			$http.post('api/backlog', new_us).
 			success(function(data) {
@@ -348,29 +368,119 @@ app.controller('HomeCtrl', function($scope, $http){
 				alert(JSON.stringify(resultat,null,4));
 		}.bind(this));*/
 		
-		$scope.current_backlog = [{'ID' : 0,
-								  'name' : 'US 1',
-								  'description' : 'Description',
-								  'order' : 1,
-								  'priority' : 2, 
-								  'difficulty' : 3,
-								  'sprint' : 1,
-								  'dependencies' : null },
-								  {'ID' : 1,
-								  'name' : 'US 2',
-								  'description' : 'Description',
-								  'order' : 1,
-								  'priority' : 2, 
-								  'difficulty' : 3,
-								  'sprint' : 2,
-								  'dependencies' : null }];
-		
 		$('#dashboard').removeClass('display-none'); // show the backlog
 		$('#dashboard-empty').addClass('display-none'); // hide the main text
 		
 		//show page's team of the project selected
-		$scope.clic_button('team.html');
+		$scope.clic_button('team');
 	}
+	
+	$scope.todo = [];
+	$scope.onGoing = [];
+	$scope.done = [];
+	
+	$scope.current_tasks_id = -1;
+	
+	$scope.current_backlog = [
+								{
+									'ID' : 0,
+									'name' : 'US 1',
+									'description' : 'Description',
+									'order' : 1,
+									'priority' : 2, 
+									'difficulty' : 3,
+									'sprint' : 1,
+									'dependencies' : null,
+									'tasks_id' : 0 
+								},
+								{
+									'ID' : 1,
+									'name' : 'US 2',
+									'description' : 'Description',
+									'order' : 1,
+									'priority' : 2, 
+									'difficulty' : 3,
+									'sprint' : 2,
+									'dependencies' : null,
+									'tasks_id' : 1
+								}
+							 ];
+							 
+	$scope.addTaskToScope = function(name, state){
+		switch(state){
+			case 'todo' :
+				$scope.todo.push(name);
+				break;
+			case 'onGoing' :
+				$scope.onGoing.push(name);
+				break;	
+			case 'done' :
+				$scope.done.push(name);
+				break;	
+		}		
+	}
+				
+	$scope.selectUS = function(task_id){
+		
+		$scope.todo = [];
+		$scope.onGoing = [];
+		$scope.done = [];
+		
+		$scope.current_tasks_id = task_id;
+
+		for(var i=0; i<$scope.tasks.length; ++i)
+			if($scope.tasks[i]['id'] == task_id)
+				for(var j=0; j<$scope.tasks[i]['tasks'].length; ++j)
+					$scope.addTaskToScope($scope.tasks[i]['tasks'][j]['name'], $scope.tasks[i]['tasks'][j]['state']);	
+	}
+	
+	$scope.addTask = function(){
+		if($scope.new_task_name == undefined)
+			show_error_task_name_empty();
+			
+		for(var i=0; i<$scope.tasks.length; ++i)
+			if($scope.tasks[i]['id'] == $scope.current_tasks_id)	
+				$scope.tasks[i]['tasks'].push({'name' : $scope.new_task_name, 'state' : $scope.new_task_state});
+		
+		$scope.addTaskToScope($scope.new_task_name, $scope.new_task_state);
+		
+		hide_popup_task();
+	}
+		
+	$scope.changeTaskState = function(name,new_state){
+		for(var i=0; i<$scope.tasks.length; ++i)
+			if($scope.tasks[i]['id'] == $scope.current_tasks_id)
+				for(var j=0; j<$scope.tasks[i]['tasks'].length; ++j)
+					if($scope.tasks[i]['tasks'][j]['name'] == name)
+						$scope.tasks[i]['tasks'][j]['state'] = new_state;
+	}
+							  
+	$scope.tasks = [{'id' : 0,
+					 'tasks' :
+						[
+							{
+							'name' : 'test task 1',
+							'state' : 'todo'
+							},
+							{ 
+							'name' : 'test task 2',
+							'state' : 'todo'
+							} 
+						]
+					 },
+					 {'id' : 1,
+					 'tasks' : 
+						[
+							{
+							'name' : 'test task 3',
+							'state' : 'todo'
+							},
+							{ 
+							'name' : 'test task 4',
+							'state' : 'todo'
+							} 
+						]
+					 }];
 	
 	//init forms
 	$scope.initPopupAddMember();
