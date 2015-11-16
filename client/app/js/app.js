@@ -92,8 +92,8 @@ app.controller('MainCtrl',function($rootScope, $http){
 	}
 	
 	$rootScope.initLoginRegistrattionForm = function(){
-		$rootScope.mail_field_login = 'schaerer.thibaut@gmail.com';
-		$rootScope.password_field_login = 'titi';
+		$rootScope.mail_field_login = '';
+		$rootScope.password_field_login = '';
 		
 		$rootScope.first_name_registration = '';
 		$rootScope.last_name_registration = '';
