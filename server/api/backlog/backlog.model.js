@@ -20,10 +20,10 @@ var BacklogSchema = new Schema({
 	  type: Number, required: true
   	  },
   dependencies: {
-	  type: [Number], required: true},
+	  type: [String], required: true},
   sprintId: {type: String, required: true},
   tasks: {
-	  type: [Number], required: true},
+	  type: [String], required: true},
 });
 
 module.exports = mongoose.model('Backlog', BacklogSchema);
