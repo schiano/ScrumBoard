@@ -15,6 +15,11 @@
     src: url('../fonts/Raleway/Raleway-Thin.ttf');
 }
 
+@font-face { 
+    font-family: 'Raleway-Bold';
+    src: url('../fonts/Raleway/Raleway-Bold.ttf');
+}
+
 /* ======================== CONTENT ========================*/
 
 html{
@@ -210,17 +215,28 @@ h5{
 	cursor: pointer;
 }
 
-.position-left{
+.position-del,.position-add{
 	position: absolute;
 	left: 5px;
+}
+
+.position-edit{
+	position: absolute;
+	left: 25px;
 }
 
 .avatar-circle{
 	border-radius: 50%;
 	//border:5px #481321 solid; /* red */
 	//border:5px #2d4d2d solid; /* green */
-	border: 5px #152939 solid;
-	width: 50%;
+	border: 1px #152939 solid;
+	width: 60px;
+	height:60px;
+	font-size:30px;
+	font-weight:bold;
+	color:white;
+	font-family:'Raleway-Thin';
+	padding-top:8px;
 }
 
 .circle{
@@ -327,8 +343,9 @@ h5{
 }
 
 #popup-us{
-	top: 35%;
+	top: 30%;
 	left: 30%;
+	width:40%;
 }
 
 .popup{

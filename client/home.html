@@ -50,9 +50,9 @@
          <div class="col-md-2 left-panel user-section">
             <center>
     
-                <div class="circle background-dark-green width-100px height-100px vertical-align-middle"><label class="font-size-40px margin-top-25px white text-thin">{{user['name'][0]}}</label></div>
+                <div class="background-dark-green avatar-circle"><label>{{user['email'][0]}}</label></div>
             
-                <h2>{{user['name']}}</h2>
+                <h2>{{ user['email'].split('\.')[0] }}</h2>
     
                 <p class="section-title">Projets En Cours</p>
     
@@ -117,7 +117,8 @@
          <!-- END DASHBOARD PANEL -->
          
          <div id="dashboard-empty" class="col-md-10">
-         	<p>Aucun projet</p>
+         	<p id="no-projet-text" class="display-none">Aucun projet</p>
+            <p id="select-projet-text" class="display-none">Choisis un projet</p>
          </div>
          
         </div>
@@ -131,6 +132,7 @@
     <input type="text" class='inline-box form-control margin-top-10px' placeholder="Ordre (exemple : 1)" id="new_us_order" ng-model="new_us_order"/>
     <input type="text" class='inline-box form-control margin-top-10px' placeholder="Priorité (exemple : 1)" id="new_us_priority" ng-model="new_us_priority"/>
     <input type="text" class='inline-box form-control margin-top-10px' placeholder="Difficulté (exemple : 3)" id="new_us_difficulty" ng-model="new_us_difficulty"/>
+    <input type="text" class='inline-box form-control margin-top-10px' placeholder="Sprint (exemple : 1)" id="new_us_sprint" ng-model="new_us_sprint"/>
     <h3 id="error_backlog" class="red"><i class="fa fa-warning"></i> Formulaire incomplet.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_backlog_popup" onclick="hide_popup_us()">Cancel</buton>
     <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_backlog_popup" ng-click="addUs()">Add</buton>
@@ -140,7 +142,12 @@
 <!-- START POPUP TEAM -->
 <div id="popup-team" class="popup display-none">	
     <p>Nouveau Membre</p>
-    <input type="text" class='inline-box form-control' placeholder="Email" id="new_membre_name" ng-model="new_membre_name"/>
+    <input type="text" class='inline-box form-control' placeholder="Email / Nom" id="new_membre_name" ng-model="new_membre_name"/><br/><br/>
+    <p class="inline-box">Droit de modification</p>
+    <select class="inline-box" id='user_right'>
+    	<option value='true'>Oui</option>
+        <option value='false'>Non</option>
+    </select><br/>
     <h3 id="error_mail_unknown_user" class="red"><i class="fa fa-warning"></i> Utilisateur inconnu.</h3>
     <h3 id="error_mail_empty_user" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_user_popup" onclick="hide_popup_team()">Cancel</buton>
@@ -150,11 +157,11 @@
 
 <!-- START POPUP PROJECT -->
 <div id="popup-project" class="popup display-none">	
-		<p>Nouveau Projet</p>
-		<input type="text" class='inline-box form-control' placeholder="Nom" id="new_project_name" ng-model="new_project_name"/>
-    	<h3 id="error_name_project" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
-		<button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_project_popup" onclick="hide_popup_project()">Cancel</button>
-		<button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_project" ng-click="addProject()">Add</button>
+    <p>Nouveau Projet</p>
+    <input type="text" class='inline-box form-control' placeholder="Nom" id="new_project_name" ng-model="new_project_name"/>
+    <h3 id="error_name_project" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
+    <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_project_popup" onclick="hide_popup_project()">Cancel</button>
+    <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_project" ng-click="addProject()">Add</button>
 </div>
 <!-- END POPUP PROJECT -->
 
