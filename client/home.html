@@ -85,22 +85,22 @@
     
             <!-- ####################### START BUTTON SECTION ####################### -->
             <div class="row container">
-                <div class='box-button' ng-click="clic_button('team.html')">
+                <div id='btn-team' class='box-button box-button-no-active' ng-click="clic_button('team')">
                  <i class="fa fa-group"></i><br/>
                  <small>Team</small>
                 </div>
                         
-                <div class='box-button' ng-click="clic_button('backlog.html')">
+                <div id='btn-backlog' class='box-button box-button-no-active' ng-click="clic_button('backlog')">
                  <i class="fa fa-th-list"></i><br/>
                  <small>Backlog</small>
                 </div>
                         
-                        <div class='box-button' ng-click="clic_button('kanban.html')">
+                <div id='btn-kanban' class='box-button box-button-no-active' ng-click="clic_button('kanban')">
                  <i class="fa fa-trello"></i><br/>
                  <small>KanBan</small>
                 </div>
                         
-                <div class='box-button' ng-click="clic_button('pert.html')">
+                <div id='btn-pert' class='box-button box-button-no-active' ng-click="clic_button('pert')">
                  <i class="fa fa-line-chart"></i><br/>
                  <small>Pert</small>
                 </div>  
@@ -135,14 +135,14 @@
     <input type="text" class='inline-box form-control margin-top-10px' placeholder="Sprint (exemple : 1)" id="new_us_sprint" ng-model="new_us_sprint"/>
     <h3 id="error_backlog" class="red"><i class="fa fa-warning"></i> Formulaire incomplet.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_backlog_popup" onclick="hide_popup_us()">Cancel</buton>
-    <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_backlog_popup" ng-click="addUs()">Add</buton>
+    </button><button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_backlog_popup" ng-click="addUs()">Add</buton>
 </div>
 <!-- END POPUP US -->
 
 <!-- START POPUP TEAM -->
 <div id="popup-team" class="popup display-none">	
     <p>Nouveau Membre</p>
-    <input type="text" class='inline-box form-control' placeholder="Email / Nom" id="new_membre_name" ng-model="new_membre_name"/><br/><br/>
+    </button><input type="text" class='inline-box form-control' placeholder="Email / Nom" id="new_membre_name" ng-model="new_membre_name"/><br/><br/>
     <p class="inline-box">Droit de modification</p>
     <select class="inline-box" id='user_right'>
     	<option value='true'>Oui</option>
@@ -151,14 +151,30 @@
     <h3 id="error_mail_unknown_user" class="red"><i class="fa fa-warning"></i> Utilisateur inconnu.</h3>
     <h3 id="error_mail_empty_user" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_user_popup" onclick="hide_popup_team()">Cancel</buton>
-    <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_user" ng-click="addMembre()">Add</buton>
+    </button><button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_user" ng-click="addMembre()">Add</buton>
 </div>
 <!-- END POPUP TEAM -->
+
+<!-- START POPUP TASK -->
+<div id="popup-task" class="popup display-none">	
+    <p>Nouvelle tâche</p>
+    </button><input type="text" class='inline-box form-control' placeholder="Nom" id="new_task_name" ng-model="new_task_name"/><br/><br/>
+    <p class="inline-box">Statut</p>
+    <select ng-model="new_task_state" class="inline-box">
+    	<option value='todo'>To Do</option>
+        <option value='onGoing'>On Going</option>
+        <option value='done'>Done</option>
+    </select><br/>
+    <h3 id="error_task_name_empty" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
+    <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_user_popup" onclick="hide_popup_task()">Cancel</buton>
+    </button><button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_user" ng-click="addTask()">Add</buton>
+</div>
+<!-- END POPUP TASK -->
 
 <!-- START POPUP PROJECT -->
 <div id="popup-project" class="popup display-none">	
     <p>Nouveau Projet</p>
-    <input type="text" class='inline-box form-control' placeholder="Nom" id="new_project_name" ng-model="new_project_name"/>
+    </button><input type="text" class='inline-box form-control' placeholder="Nom" id="new_project_name" ng-model="new_project_name"/>
     <h3 id="error_name_project" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_project_popup" onclick="hide_popup_project()">Cancel</button>
     <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_project" ng-click="addProject()">Add</button>
