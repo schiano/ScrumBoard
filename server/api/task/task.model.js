@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var BacklogSchema = new Schema({
+var TaskSchema = new Schema({
   name: {
 	  type: String, required: true
 	  },
@@ -13,17 +13,21 @@ var BacklogSchema = new Schema({
   order: {
 	  type: Number, required: true
 	  },
-  priority: {
-	  type: Number, required: true
-  	  },
-  difficulty: {
+  cost: {
 	  type: Number, required: true
   	  },
   dependencies: {
-	  type: [String], required: false},
-  sprintId: {type: String, required: false},
-  tasks: {
-	  type: [String], required: false},
+	  type: [String], required: false
+	  },
+  assigned: {
+	  type: [String], required: false
+	  },
+  progress: {
+	  type: Number, required: true
+  }, 
+  status: {
+	  type: Number, required: true
+  }
 });
 
-module.exports = mongoose.model('Backlog', BacklogSchema);
+module.exports = mongoose.model('Task', TaskSchema);
