@@ -1,63 +1,69 @@
-
-<!-- START KANBAN SECTION  -->
+<div class="row">
+    <select class="margin-left-15px margin-top-20px inline-block" ng-model="selectedUS"
+                                    ng-options="us as us.name for us in current_backlog"
+                                    ng-change="selectUS(selectedUS.tasks_id)">
+        <option value="">Sélectionne une US</option>   
+    </select>
+    
+    <label class="pointer inline-block" onclick="show_popup_task()">Ajouter une tâche</label>
+</div>
+    
+<!-- START KANBAN SECTION	-->
 <div class="col-md-8">
+    
+	<!-- START HEADER KANBAN -->
+	<div class="row">
+			<p class="col-md-4 col-xs-4 section-title">TO DO</p>
+			<p class="col-md-4 col-xs-4 section-title">ON GOING</p>
+			<p class="col-md-4 col-xs-4 section-title">DONE</p>
+	</div>
+	<!-- END HEADER KANBAN -->
 
-  <!-- START HEADER KANBAN -->
-  <div class="row">
-      <p class="col-md-4 col-xs-4 section-title">TO DO</p>
-      <p class="col-md-4 col-xs-4 section-title">ON GOING</p>
-      <p class="col-md-4 col-xs-4 section-title">DONE</p>
-  </div>
-  <!-- END HEADER KANBAN -->
+	<!-- START CONTENT KANBAN -->
+	<div class="row section-content">
 
-  <!-- START CONTENT KANBAN -->
-  <div class="row">
+		<ul id="sortable_0" class="col-md-4 col-xs-4 vertical-section connectedSortable">
+			<li id="draggable_todo_{{$index}}" class='box-task' ng-repeat="task in todo" >{{task}}</li>
+		</ul>
+	
+		<ul id="sortable_1" class="col-md-4 col-xs-4 vertical-section connectedSortable">
+			<li id="draggable_onGonig_{{$index}}" class='box-task' ng-repeat="task in onGoing" >{{task}}</li>
+		</ul>
 
-    <ul id="sortable1" class="col-md-4 col-xs-4 section-content vertical-section connectedSortable">
-      <li class='box-task'>Vue HTML/CSS</li>
-      <li class='box-task'>Architecture REST</li>
-    </ul>
-  
-    <ul id="sortable2" class="col-md-4 col-xs-4 section-content vertical-section connectedSortable">
-      <li class='box-task'>Création test E2E</li>
-      <li class='box-task'>Création base de données</li>
-      <li class='box-task'>Remplisssage base de données</li>
-    </ul>
+		<ul id="sortable_2" class="col-md-4 col-xs-4 vertical-section connectedSortable">
+			<li id="draggable_done_{{$index}}" class='box-task' ng-repeat="task in done" >{{task}}</li>
+		</ul>
 
-    <ul id="sortable3" class="col-md-4 col-xs-4 section-content vertical-section connectedSortable">
-      <li class='box-task'>Spec base de données</li>
-    </ul>
-
-  </div>
-  <!-- END CONTENT KANBAN -->
+	</div>
+	<!-- END CONTENT KANBAN -->
 
 </div>
 <!-- END KANBAN SECTION -->
 
 <!-- START TASK INFO SECTION -->
 <div class="col-md-4">
-  <div class="row padding-left-10">
-    <p class="section-title col-md-12">Task Info</p> 
+	<div class="row padding-left-10">
+		<p class="section-title col-md-12">Task Info</p> 
 
-    <div class="section-content vertical-section col-md-12">
-      <h3>Création base de données</h3>
-      <div id="canvas-holder">
-        <canvas id="chart-area" width="150" height="150"/>
-      </div>
-      <small>Jérémy lecouvert</small>
-      <h1>80%</h1>
-    </div>
-  </div>
+		<div class="section-content vertical-section col-md-12">
+			<h3>Création base de données</h3>
+			<div id="canvas-holder">
+				<canvas id="chart-area" width="150" height="150"/>
+			</div>
+			<small>Jérémy lecouvert</small>
+			<h1>80%</h1>
+		</div>
+	</div>
 </div>
 <!-- END TASK INFO SECTION -->
 
 <!-- START BURN DOWN CHART SECTION -->
 <div class="col-md-8">
-  <div class="row">
-    <p class="section-title col-md-12">Burn down chart</p>
-  </div>
+	<div class="row">
+		<p class="section-title col-md-12">Burn down chart</p>
+	</div>
 
-  <canvas class="col-md-12" id="canvas"></canvas>
+	<canvas class="col-md-12" id="canvas"></canvas>
 
 </div>
 <!-- END BURN DOWN CHART SECTION -->
@@ -65,17 +71,42 @@
 <!-- DRAG AND DROP -->
 <script type="text/javascript-lazy">
 
-  $(function() {
-	 $( "#sortable1, #sortable2, #sortable3" ).sortable({
-		connectWith: ".connectedSortable"
-	 }).disableSelection();
-  });
+	var scope = angular.element($('body')).scope();
+
+	$(function() {
+		$( "#sortable_0, #sortable_1, #sortable_2" ).sortable({
+			connectWith: ".connectedSortable"
+		}).disableSelection();
+	});
+	
+	$("#sortable_0, #sortable_1, #sortable_2").droppable({
+		drop: function (event, ui) {
+						
+			var id_src = ui.draggable.prop('id');
+			var task_text = $('#'+id_src).html();
+			var array_target = (this.id).split('_');
+			
+			switch(array_target[1]){
+				case '0':
+					scope.changeTaskState(task_text,'todo');
+					break;	
+				case '1':
+					scope.changeTaskState(task_text,'onGoing');
+					break;	
+				case '2':
+					scope.changeTaskState(task_text,'done');
+					break;	
+			}
+		}
+	}).sortable({
+		revert: true
+	});
 
 </script>
 
 <!-- PIE CHART -->
 <script type="text/javascript-lazy">
-	  
+		
 	var ctxPieChart = document.getElementById("chart-area").getContext("2d");
 	window.myPie = new Chart(ctxPieChart).Pie(pieData);
 	
