@@ -40,11 +40,21 @@ function hide_error_backlog(){
 	$('#error_backlog').hide();
 }
 
+//function error task mail empty
+function show_error_task_name_empty(){
+	$('#error_task_name_empty').show();
+}
+
+function hide_error_task_name_empty(){
+	$('#error_task_name_empty').hide();
+}
+
 function hide_all_errors(){
 	hide_error_name_project();
 	hide_error_mail_unknown_user();
 	hide_error_mail_empty_user();
 	hide_error_backlog();
+	 hide_error_task_name_empty();
 }
 
 hide_all_errors();
@@ -71,6 +81,17 @@ function hide_popup_team(){
 	hide_all_errors();
 	$('#sub-body').removeClass('sub-body-blur');
 	$('#popup-team').addClass('display-none');
+}
+
+function show_popup_task(){
+	$('#sub-body').addClass('sub-body-blur');
+	$('#popup-task').removeClass('display-none');
+}
+
+function hide_popup_task(){
+	hide_all_errors();
+	$('#sub-body').removeClass('sub-body-blur');
+	$('#popup-task').addClass('display-none');
 }
 
 function show_popup_us(){
