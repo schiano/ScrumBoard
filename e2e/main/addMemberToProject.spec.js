@@ -5,6 +5,8 @@ describe('Add member to project Test Suit', function() {
 
 	beforeEach(function () {
 		browser.get('/');
+		co = require('../connexion_inscription/acc.po.js');
+		co.connection('test@test.com', 'test');
 		page = require('./main.po');
 		page.connectWithDefaultUser();
 	});
