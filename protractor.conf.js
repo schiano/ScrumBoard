@@ -22,6 +22,10 @@ exports.config = {
     connexion_inscription: 'e2e/connexion_inscription/*.spec.js',
   },
 
+  onPrepare: function() {
+    browser.driver.manage().window().maximize();
+  },
+
   // Patterns to exclude.
   exclude: [],
 
