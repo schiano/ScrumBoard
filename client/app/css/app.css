@@ -184,8 +184,18 @@ h5{
 	margin-left:5px;
 }
 
+.margin-left-15px{
+	margin-left:15px;
+}
+
 .vertical-align-middle{
 	vertical-align: middle;
+}
+
+/*===================== SIZE =====================*/
+
+.width-300{
+	width:300px;	
 }
 
 /*===================== PADDING =========================*/
@@ -215,7 +225,7 @@ h5{
 	cursor: pointer;
 }
 
-.position-del,.position-add{
+.position-del,.position-add,.position-back{
 	position: absolute;
 	left: 5px;
 }
@@ -223,6 +233,11 @@ h5{
 .position-edit{
 	position: absolute;
 	left: 25px;
+}
+
+.position-plus{
+	position: absolute;
+	left: 50px;	
 }
 
 .avatar-circle{
@@ -265,7 +280,12 @@ h5{
 }
 
 .vertical-section{
-	height:300px;
+	min-height:300px;
+}
+
+.overflow-y-auto{
+	overflow:auto;
+	overflow-x:hidden;	
 }
 
 .transparent-section{
@@ -314,13 +334,17 @@ h5{
 	display:inline-block;
 	vertical-align: top;
 	text-align: center;
-	background: rgba(0,0,0,0.6);
-	color:white;
 	cursor: pointer;
 }
 
-.box-button:hover{
-	background: rgba(0,0,0,0.3);
+.box-button-no-active{
+	background: rgba(0,0,0,0.6);
+	color:white;
+}
+
+.box-button-active{
+	background: rgba(255,255,255,0.6);
+	color:#333;
 }
 
 .box-button i{
@@ -336,7 +360,7 @@ h5{
 
 /* ============================ POPUP ============================ */
 
-#popup-team, #popup-project{
+#popup-team, #popup-task, #popup-project, #popup-dependencies{
 	width:20%;
 	top: 40%;
 	left: 40%;
@@ -411,6 +435,10 @@ h5{
 
 .green{
 	color: #17b881;
+}
+
+.blue{
+	color: #06F;
 }
 
 .sky-blue{

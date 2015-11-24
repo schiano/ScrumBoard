@@ -1,0 +1,91 @@
+
+<select class="form-control width-300 margin-left-15px margin-top-20px" ng-model="selectedUS"
+                                ng-options="us.sprintId for us in current_backlog | unique:'sprintId'"
+                                ng-change="selectPertUS(selectedUS)">
+    <option value="">Sélectionne un Sprint</option>   
+</select>
+
+<!-- <div id="myDiagram" class=="margin-top-20px" style="width:100%; height:400px"></div> -->
+<div id="basicdiagram" style="width: 100%; height: 500px; margin-top:20px" />
+
+<!-- INCLUDE PERT -->
+<script type="text/javascript-lazy">
+		
+	function onTemplateRender(event, data) {
+		var itemConfig = data.context;
+	
+		if (data.templateName == "pertTemplate") {
+			data.element.find("[name=titleBackground]").css({ "background": itemConfig.itemTitleColor });
+	
+			var fields = ["title", "et", "lt"];
+			for (var index = 0; index < fields.length; index++) {
+				var field = fields[index];
+	
+				var element = data.element.find("[name=" + field + "]");
+				if (element.text() != itemConfig[field]) {
+					element.text(itemConfig[field]);
+				}
+			}
+		}
+	}
+	
+	function getPERTTemplate() {
+		var result = new primitives.orgdiagram.TemplateConfig();
+		result.name = "pertTemplate";
+	
+		result.itemSize = new primitives.common.Size(100, 60);
+		result.minimizedItemSize = new primitives.common.Size(3, 3);
+		result.highlightPadding = new primitives.common.Thickness(2, 2, 2, 2);
+	
+	
+		var itemTemplate = jQuery(
+		  '<div class="bp-item bp-corner-all bt-item-frame">'
+			+ '<div name="titleBackground" class="bp-item bp-corner-all bp-title-frame" style="top: 2px; left: 2px; width: 96px; height: 20px;">'
+				+ '<div name="title" class="bp-item bp-title" style="top: 3px; left: 6px; width: 88px; height: 18px;">'
+				+ '</div>'
+			+ '</div>'
+			+ '<div class="bp-item" style="padding: 4px; top: 20px; left: 0px; width: 50px; height: 20px; font-size: 12px;">ET</div>'
+			+ '<div name="et" class="bp-item" style="padding: 4px; top: 40px; left: 0px; width: 50px; height: 20px; font-size: 12px;"></div>'
+			+ '<div class="bp-item" style="padding: 4px; top: 20px; left: 50px; width: 50px; height: 20px; font-size: 12px;">LT</div>'
+			+ '<div name="lt" class="bp-item" style="padding: 4px; top: 40px; left: 50px; width: 50px; height: 20px; font-size: 12px;"></div>'
+			+ '<div class="bp-item" style="line-height: 0px; border-top: 1px solid gray; top: 40px; left: 4px; width: 92px; height: 1px;"></div>'
+			+ '<div class="bp-item" style="line-height: 0px; border-left: 1px solid gray; top: 24px; left: 50px; width: 1px; height: 32px;"></div>'
+		+ '</div>'
+		).css({
+			width: result.itemSize.width + "px",
+			height: result.itemSize.height + "px"
+		}).addClass("bp-item bp-corner-all bt-item-frame");
+		result.itemTemplate = itemTemplate.wrap('<div>').parent().html();
+	
+		return result;
+	}
+
+	function init(){
+		
+		var options = new primitives.famdiagram.Config();
+		var scope = angular.element($('body')).scope();
+		var items = scope.items;
+		
+		options.annotations = [new primitives.famdiagram.HighlightPathAnnotationConfig({ items: [1, 3, 5, 6, 8, 9, 10, 12] })];
+		
+		options.items = items;
+		options.cursorItem = 0;
+		options.linesWidth = 1;
+		options.linesColor = "black";
+		options.lineItemsInterval = 5;
+		options.hasSelectorCheckbox = primitives.common.Enabled.True;
+		options.orientationType = primitives.common.OrientationType.Left;
+		options.pageFitMode = primitives.common.PageFitMode.None;
+		options.templates = [getPERTTemplate()];
+		options.onItemRender = onTemplateRender;
+		options.defaultTemplateName = "pertTemplate";
+		options.arrowsDirection = primitives.common.GroupByType.Children;
+		
+		options.highlightLinesColor = primitives.common.Colors.Red;
+		options.highlightLinesWidth = 2;
+		options.highlightLinesType = primitives.common.LineType.Solid;
+			
+		jQuery("#basicdiagram").famDiagram(options);
+		jQuery("#basicdiagram").famDiagram("update", primitives.orgdiagram.UpdateMode.Refresh);
+	}
+</script>

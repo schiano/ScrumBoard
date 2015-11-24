@@ -2,28 +2,31 @@
 <html lang="en" ng-app="scrumBoardApp" ng-controller="HomeCtrl">
 
 <head>
-		<meta charset="utf-8" />
-		<title>ScrumBoard</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="author" content=""/>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-		<meta content="fr" http-equiv="Content-Language"/>
-		<link rel="shortcut icon" href="images/icon/favicon.jpg" type="image/x-icon"/>
-		
-		<!-- BOOTSTRAP STYLESHEETS -->
-		<link rel="stylesheet" href="app/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="app/css/bootstrap-theme.min.css"/>
-		<link rel="stylesheet" href="app/css/bootstrap-wysihtml5.css"/>
-		
-		<!-- FONT AWESOME STYLESHEETS -->
-		<link rel="stylesheet" href="app/css/font-awesome.min.css"/>
-		
-		<!-- CALENDAR STYLESHEET -->
-		<link rel="stylesheet" href="app/css/calendar.css"/>
-		
-		<!-- THEME STYLESHEETS -->
-		<link rel="stylesheet" href="app/css/app.css"/>
-		<link rel="stylesheet" href="app/css/color.css"/>
+    <meta charset="utf-8" />
+    <title>ScrumBoard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content=""/>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="fr" http-equiv="Content-Language"/>
+    <link rel="shortcut icon" href="images/icon/favicon.jpg" type="image/x-icon"/>
+    
+    <!-- BOOTSTRAP STYLESHEETS -->
+    <link rel="stylesheet" href="app/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="app/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="app/css/bootstrap-wysihtml5.css"/>
+    
+    <!-- FONT AWESOME STYLESHEETS -->
+    <link rel="stylesheet" href="app/css/font-awesome.min.css"/>
+    
+    <!-- CALENDAR STYLESHEET -->
+    <link rel="stylesheet" href="app/css/calendar.css"/>
+    
+    <!-- THEME STYLESHEETS -->
+    <link rel="stylesheet" href="app/css/app.css"/>
+    <link rel="stylesheet" href="app/css/color.css"/>
+
+    <link rel="stylesheet" href="app/css/jquery-ui-1.10.2.custom.css" />
+    <link rel="stylesheet" href="app/css/primitives.css" media="screen" type="text/css" />
 
 </head>
 
@@ -52,7 +55,7 @@
     
                 <div class="background-dark-green avatar-circle"><label>{{user['email'][0]}}</label></div>
             
-                <h2>{{ user['email'].split('\.')[0] }}</h2>
+                <h2 id="user_name">{{ user['email'].split('\.')[0] }}</h2>
     
                 <p class="section-title">Projets En Cours</p>
     
@@ -85,24 +88,29 @@
     
             <!-- ####################### START BUTTON SECTION ####################### -->
             <div class="row container">
-                <div class='box-button' ng-click="clic_button('team.html')">
+                <div id='btn-team' class='box-button box-button-no-active' ng-click="clic_button('team')">
                  <i class="fa fa-group"></i><br/>
                  <small>Team</small>
                 </div>
                         
-                <div class='box-button' ng-click="clic_button('backlog.html')">
+                <div id='btn-backlog' class='box-button box-button-no-active' ng-click="clic_button('backlog')">
                  <i class="fa fa-th-list"></i><br/>
                  <small>Backlog</small>
                 </div>
                         
-                        <div class='box-button' ng-click="clic_button('kanban.html')">
+                <div id='btn-kanban' class='box-button box-button-no-active' ng-click="clic_button('kanban')">
                  <i class="fa fa-trello"></i><br/>
                  <small>KanBan</small>
                 </div>
                         
-                <div class='box-button' ng-click="clic_button('pert.html')">
+                <div id='btn-pert' class='box-button box-button-no-active' ng-click="clic_button('pert')">
                  <i class="fa fa-line-chart"></i><br/>
                  <small>Pert</small>
+                </div>
+                
+                <div id='btn-gantt' class='box-button box-button-no-active' ng-click="clic_button('gantt')">
+                 <i class="fa fa-line-chart"></i><br/>
+                 <small>Gantt</small>
                 </div>  
             </div>
                     
@@ -135,14 +143,44 @@
     <input type="text" class='inline-box form-control margin-top-10px' placeholder="Sprint (exemple : 1)" id="new_us_sprint" ng-model="new_us_sprint"/>
     <h3 id="error_backlog" class="red"><i class="fa fa-warning"></i> Formulaire incomplet.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_backlog_popup" onclick="hide_popup_us()">Cancel</buton>
-    <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_backlog_popup" ng-click="addUs()">Add</buton>
+    </button><button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_backlog_popup" ng-click="addUs()">Add</buton>
 </div>
 <!-- END POPUP US -->
+
+<!-- START POPUP TASK -->
+<div id="popup-task" class="popup display-none">	
+    <p>Nouvelle tâche</p>
+    </button><input type="text" class='inline-box form-control margin-top-10px' placeholder="Nom" id="new_task_name" ng-model="new_task_name"/>
+    <!-- <input type="text" class='inline-box form-control margin-top-10px' placeholder="Développeur" id="new_task_user" ng-model="new_task_user"/> -->
+    <select ng-model="new_task_user" class="form-control margin-top-10px">
+    	<option ng-repeat="member in projects[current_project]['members']" option="{{member['name']}}">{{member['name']}}</option>
+    </select>
+    <input type="text" class='inline-box form-control margin-top-10px' placeholder="Ordre" id="new_task_order" ng-model="new_task_order"/>
+    <input type="text" class='inline-box form-control margin-top-10px' placeholder="Coût" id="new_task_cost" ng-model="new_task_cost"/>
+    
+    <h3 id="error_user_unknown" class="red"><i class="fa fa-warning"></i> Utilisateur inconnu.</h3>
+    <h3 id="error_task_name_empty" class="red"><i class="fa fa-warning"></i> Formulaire incomplet.</h3>
+    <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_user_popup" onclick="hide_popup_task()">Cancel</buton>
+    </button><button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_user" ng-click="addTask()">Add</buton>
+</div>
+<!-- END POPUP TASK -->
+
+<!-- START DEPENDENCIES TASK -->
+<div id="popup-dependencies" class="popup display-none">	
+    <p>Nouvelle tâche</p>
+    </button><select id="new_dep_task" ng-model="new_dep_task" class="form-control margin-top-10px">
+    	<option ng-repeat="task in other_task_list" value="{{task}}">{{task['name']}}</option>
+    </select>
+	<h3 id="error_task_not_inquire" class="red"><i class="fa fa-warning"></i> Tâche non renseigné.</h3>
+    <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_dep_task_popup" onclick="hide_popup_dependencies()">Cancel</buton>
+    </button><button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_dep_task" ng-click="addDep()">Add</buton>
+</div>
+<!-- END DEPENDENCIES TASK -->
 
 <!-- START POPUP TEAM -->
 <div id="popup-team" class="popup display-none">	
     <p>Nouveau Membre</p>
-    <input type="text" class='inline-box form-control' placeholder="Email / Nom" id="new_membre_name" ng-model="new_membre_name"/><br/><br/>
+    </button><input type="text" class='inline-box form-control' placeholder="Email / Nom" id="new_membre_name" ng-model="new_membre_name"/><br/><br/>
     <p class="inline-box">Droit de modification</p>
     <select class="inline-box" id='user_right'>
     	<option value='true'>Oui</option>
@@ -151,31 +189,37 @@
     <h3 id="error_mail_unknown_user" class="red"><i class="fa fa-warning"></i> Utilisateur inconnu.</h3>
     <h3 id="error_mail_empty_user" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_user_popup" onclick="hide_popup_team()">Cancel</buton>
-    <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_user" ng-click="addMembre()">Add</buton>
+    </button><button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_user" ng-click="addMembre()">Add</buton>
 </div>
 <!-- END POPUP TEAM -->
 
 <!-- START POPUP PROJECT -->
 <div id="popup-project" class="popup display-none">	
     <p>Nouveau Projet</p>
-    <input type="text" class='inline-box form-control' placeholder="Nom" id="new_project_name" ng-model="new_project_name"/>
+    </button><input type="text" class='inline-box form-control' placeholder="Nom" id="new_project_name" ng-model="new_project_name"/>
     <h3 id="error_name_project" class="red"><i class="fa fa-warning"></i> Veuillez saisir un nom.</h3>
     <button class="btn btn-danger inline-box margin-top-10px" id="btn_cancel_project_popup" onclick="hide_popup_project()">Cancel</button>
     <button class="btn btn-success inline-box margin-top-10px margin-left-5px" id="btn_add_project" ng-click="addProject()">Add</button>
 </div>
 <!-- END POPUP PROJECT -->
 
+<!-- BASIC PRIMITIVES -->
+<script type="text/javascript" src="app/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="app/js/jquery-ui-1.10.2.custom.min.js"></script>
+<script type="text/javascript" src="app/js/primitives.min.js"></script>
+
 <!-- INCLUDE ANGULAR -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+<script type="text/javascript" src="app/js/angular.min.js"></script>
 
-<!-- INCLUDE THE LATEST VERSION OF JQUERY -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
-<!-- ANGULAR APP -->
+<!-- MAIN SCRIPT -->
+<script type="text/javascript" src="app/js/script.js"></script>
+
+<!-- APP -->
 <script type="text/javascript" src="app/js/app.js"></script>
 
-<!-- CALENDAR -->
-<script type="text/javascript" src="app/js/calendar.min.js"></script>
+<!-- TREE -->
+<script type="text/javascript" src="app/js/tree.js"></script>
 
 <!-- Charts -->
 <script type="text/javascript" src="app/js/chart.js"></script>
@@ -183,14 +227,10 @@
 <script type="text/javascript" src="app/js/pie-chart.js"></script>
 
 <!-- INCLUDE JQUERY UI-->
-<script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript" src="app/js/jquery-ui.js"></script>
 
-<!-- PERT SCRIPT -->
-<script type="text/javascript" src="app/js/GO_JS/go.js"></script>
-<script type="text/javascript" src="app/js/pert.js"></script>
 
 <!-- HOME SCRIPT -->
 <script type="text/javascript" src="app/js/home.js"></script>
-
 
 </html>
