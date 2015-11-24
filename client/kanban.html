@@ -1,11 +1,12 @@
+
 <div class="row">
-    <select class="margin-left-15px margin-top-20px inline-block" ng-model="selectedUS"
-                                    ng-options="us as us.name for us in current_backlog"
-                                    ng-change="selectUS(selectedUS.tasks_id)">
-        <option value="">Sélectionne une US</option>   
+    <select class="form-control width-300 margin-left-15px margin-top-20px" ng-model="selectedUS"
+                                    ng-options="us.sprintId for us in current_backlog | unique:'sprintId'"
+                                    ng-change="selectUS(selectedUS.sprintId)">
+        <option value="">Sélectionne un Sprint</option>   
     </select>
     
-    <label class="pointer inline-block" onclick="show_popup_task()">Ajouter une tâche</label>
+    <!-- <label class="pointer inline-block" onclick="show_popup_task()">Ajouter une tâche</label> -->
 </div>
     
 <!-- START KANBAN SECTION	-->
@@ -23,15 +24,15 @@
 	<div class="row section-content">
 
 		<ul id="sortable_0" class="col-md-4 col-xs-4 vertical-section connectedSortable">
-			<li id="draggable_todo_{{$index}}" class='box-task' ng-repeat="task in todo" >{{task}}</li>
+			<li ng-repeat="task in todo" id="task_{{task['id']}}" class='box-task'>{{task['name']}}</li>
 		</ul>
 	
 		<ul id="sortable_1" class="col-md-4 col-xs-4 vertical-section connectedSortable">
-			<li id="draggable_onGonig_{{$index}}" class='box-task' ng-repeat="task in onGoing" >{{task}}</li>
+			<li ng-repeat="task in onGoing" id="task_{{task['id']}}" class='box-task' >{{task['name']}}</li>
 		</ul>
 
 		<ul id="sortable_2" class="col-md-4 col-xs-4 vertical-section connectedSortable">
-			<li id="draggable_done_{{$index}}" class='box-task' ng-repeat="task in done" >{{task}}</li>
+			<li ng-repeat="task in done" id="task_{{task['id']}}" class='box-task' >{{task['name']}}</li>
 		</ul>
 
 	</div>
@@ -72,6 +73,7 @@
 <script type="text/javascript-lazy">
 
 	var scope = angular.element($('body')).scope();
+	scope.initKanban();
 
 	$(function() {
 		$( "#sortable_0, #sortable_1, #sortable_2" ).sortable({
@@ -83,23 +85,23 @@
 		drop: function (event, ui) {
 						
 			var id_src = ui.draggable.prop('id');
-			var task_text = $('#'+id_src).html();
+			var id = parseInt(id_src.split('_')[1]);
 			var array_target = (this.id).split('_');
 			
 			switch(array_target[1]){
 				case '0':
-					scope.changeTaskState(task_text,'todo');
+					scope.changeTaskState(id,'todo');
 					break;	
 				case '1':
-					scope.changeTaskState(task_text,'onGoing');
+					scope.changeTaskState(id,'onGoing');
 					break;	
 				case '2':
-					scope.changeTaskState(task_text,'done');
+					scope.changeTaskState(id,'done');
 					break;	
 			}
 		}
 	}).sortable({
-		revert: true
+		//revert: true
 	});
 
 </script>
