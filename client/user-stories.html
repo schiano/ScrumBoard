@@ -1,0 +1,45 @@
+
+<!-- START USER STORIES SECTION  -->
+<div class="col-md-12">
+
+ <div class="row">
+
+	<div class="section-title col-md-12 text-align">
+    	<label class="position-back pointer" ng-click="slide_page('backlog')">Retour</label>
+    	{{current_us_name}}
+    </div><br/><br/>
+
+    <!-- START HEADER USER STORIES  -->
+    <p class="section-title col-md-1 sky-blue pointer" id="new_us" onclick="show_popup_task()">Ajouter</p>
+    <!-- <p class="section-title col-md-1">ID</p> -->
+    <p class="section-title col-md-5">Nom</p>
+    <p class="section-title col-md-4">Assigned</p>
+    <p class="section-title col-md-1">Ordre</p>
+    <p class="section-title col-md-1">Coût</p>
+    <!-- END HEADER USER STORIES -->
+
+	
+
+    <!-- START USER STORIES CONTENT -->
+    <div class="section-content col-md-12">
+      
+      <div ng-repeat="task in current_us_tasks">
+         <p class="col-md-1">
+         	<i class="fa fa-close red pointer position-del" id="del_task_{{getIndex(tasks,task['id'])}}" ng-click="removeTask(getIndex(tasks,task['id']),$index)"></i>
+            <i class="fa fa-edit green pointer position-edit" id="edit_task_{{getIndex(tasks,task['id'])}}" onclick="show_edit_popup_task({{getIndex(tasks,task['id'])}},{{$index}})"></i>
+            <i class="fa fa-plus blue pointer position-plus" id="show_dep_{{getIndex(tasks,task['id'])}}" ng-click="showDep(task)"></i>
+         </p>
+         <!-- <p class="col-md-1">{{task['id']}}</p> -->
+         <p class="col-md-5">{{task['name']}}</p>
+         <p class="col-md-4">{{task['assigned']}}</p>
+         <p class="col-md-1">{{task['order']}}</p>
+         <p class="col-md-1">{{task['cost']}}</p>
+      </div>
+
+    </div>
+    <!-- END USER STORIES CONTENT -->
+
+ </div>
+
+</div>
+<!-- END USER STORIES SECTION  -->

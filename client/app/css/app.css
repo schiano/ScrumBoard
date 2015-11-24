@@ -192,6 +192,12 @@ h5{
 	vertical-align: middle;
 }
 
+/*===================== SIZE =====================*/
+
+.width-300{
+	width:300px;	
+}
+
 /*===================== PADDING =========================*/
 
 .padding-left-10{
@@ -219,7 +225,7 @@ h5{
 	cursor: pointer;
 }
 
-.position-del,.position-add{
+.position-del,.position-add,.position-back{
 	position: absolute;
 	left: 5px;
 }
@@ -227,6 +233,11 @@ h5{
 .position-edit{
 	position: absolute;
 	left: 25px;
+}
+
+.position-plus{
+	position: absolute;
+	left: 50px;	
 }
 
 .avatar-circle{
@@ -349,7 +360,7 @@ h5{
 
 /* ============================ POPUP ============================ */
 
-#popup-team, #popup-task, #popup-project{
+#popup-team, #popup-task, #popup-project, #popup-dependencies{
 	width:20%;
 	top: 40%;
 	left: 40%;
@@ -424,6 +435,10 @@ h5{
 
 .green{
 	color: #17b881;
+}
+
+.blue{
+	color: #06F;
 }
 
 .sky-blue{
