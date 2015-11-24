@@ -1,14 +1,14 @@
 describe('Connextion test suit', function() {
 
   beforeEach(function() {
-  	browser.get('/');
+    browser.get('/');
   });
 
   /*it('should connect using the default user', function() {
 
-  	// Filling the mail field
+    // Filling the mail field
     var mailField = element(by.id('mail_field_login'));
-  	mailField.clear();
+    mailField.clear();
     mailField.sendKeys('test@test.com');
 
     // Filling the password field
@@ -21,7 +21,7 @@ describe('Connextion test suit', function() {
 
     browser.waitForAngular();
 
-  	// Expecting to be authentified on the home page
+    // Expecting to be authentified on the home page
     expect(element(by.id('user_name')).getAttribute('innerText')).toEqual("test");
   });*/
 
