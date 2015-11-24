@@ -15,8 +15,22 @@ var MainPage = function() {
   };
 
   this.connectWithDefaultUser = function() {
-    // Default user : test@test.com
-    // Password     : test
+    browser.get('/');
+    
+    // Filling the mail field
+    var mailField = element(by.id('mail_field_login'));
+    mailField.clear();
+    mailField.sendKeys('test@test.com');
+
+    // Filling the password field
+    var passField = element(by.id('password_field_login'));
+    passField.clear();
+    passField.sendKeys('test');
+
+    // Clicking 'connexion'
+    element(by.id('next_button')).click();
+
+    browser.sleep(5000);
   }
 
   this.clickAddMember = function() {
