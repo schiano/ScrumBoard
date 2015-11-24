@@ -14,13 +14,12 @@ exports.config = {
 
   // If true, only chromedriver will be started, not a standalone selenium.
   // Tests for browsers other than chrome will not run.
-  chromeOnly: true,
+  // chromeOnly: true,
 
   // list of files / patterns to load in the browser
   suites: {
-    main: 'e2e/main/*.spec.js',
-    connexion: 'e2e/connexion/*.spec.js',
-    inscription: 'e2e/inscription/*.spec.js'
+    //main: 'e2e/main/*.spec.js',
+    connexion_inscription: 'e2e/connexion_inscription/*.spec.js',
   },
 
   // Patterns to exclude.

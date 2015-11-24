@@ -438,6 +438,13 @@ module.exports = function (grunt) {
             browser: 'chrome'
           }
         }
+      },
+      firefox: {
+        options: {
+          args: {
+            browser: 'firefox'
+          }
+        }
       }
     },
 
@@ -608,6 +615,18 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin'
+  ]);
+
+  grunt.registerTask('travis-protractor', [
+    'clean:server',
+    'env:all',
+    'env:test',
+    'concurrent:test',
+    'injector',
+    'wiredep',
+    'autoprefixer',
+    'express:dev',
+    'protractor'
   ]);
 
   grunt.registerTask('default', [
