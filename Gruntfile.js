@@ -434,10 +434,10 @@ module.exports = function (grunt) {
         keepAlive: true,
         noColor: false
       },
-      chrome: {
+      firefox: {
         options: {
           args: {
-            browser: 'chrome'
+            browser: 'firefox'
           }
         }
       },
