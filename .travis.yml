@@ -13,8 +13,8 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - nohup bash -c "./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager start 2>&1 &"
 script:
-  - grunt test:all
-  - grunt travis-protractor
+  - grunt test:e2e
+  - grunt test
 services: mongodb
 notifications:
   slack: cdp-team:iYfuVTrcNZd8vP2G3hhF0dGE
