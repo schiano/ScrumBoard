@@ -19,7 +19,7 @@ exports.config = {
   // list of files / patterns to load in the browser
   suites: {
     //main: 'e2e/main/*.spec.js',
-    connexion_inscription: 'e2e/connexion_inscription/*.spec.js',
+    connexion: 'e2e/connexion_inscription/connexion.spec.js',
   },
 
   onPrepare: function() {
@@ -36,7 +36,7 @@ exports.config = {
   // and
   // https://code.google.com/p/selenium/source/browse/javascript/webdriver/capabilities.js
   capabilities: {
-    'browserName': 'firefox'
+    'browserName': 'chrome'
   },
 
   // ----- The test framework -----
