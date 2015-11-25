@@ -593,6 +593,14 @@ module.exports = function (grunt) {
       ]);
     }
 
+    else if (target === 'all') {
+      return grunt.task.run([
+        'test:server',
+        'test:client',
+        'test:e2e'
+        ]);
+    }
+
     else grunt.task.run([
       'test:server',
       'test:client'
@@ -615,18 +623,6 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin'
-  ]);
-
-  grunt.registerTask('travis-protractor', [
-    'clean:server',
-    'env:all',
-    'env:test',
-    'concurrent:test',
-    'injector',
-    'wiredep',
-    'autoprefixer',
-    'express:dev',
-    'protractor'
   ]);
 
   grunt.registerTask('default', [
