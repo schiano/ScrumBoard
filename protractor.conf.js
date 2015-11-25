@@ -14,7 +14,8 @@ exports.config = {
 
   // If true, only chromedriver will be started, not a standalone selenium.
   // Tests for browsers other than chrome will not run.
-  // chromeOnly: true,
+  // chromeOnly: true, // DEPRECATED
+  directConnect: true,
 
   // list of files / patterns to load in the browser
   suites: {
