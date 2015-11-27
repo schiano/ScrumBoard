@@ -430,15 +430,17 @@ module.exports = function (grunt) {
 
     protractor: {
       options: {
-        configFile: 'protractor.conf.js'
+        configFile: 'protractor.conf.js',
+        keepAlive: true,
+        noColor: false
       },
-      chrome: {
+      firefox: {
         options: {
           args: {
-            browser: 'chrome'
+            browser: 'firefox'
           }
         }
-      }
+      },
     },
 
     env: {
@@ -584,6 +586,14 @@ module.exports = function (grunt) {
         'express:dev',
         'protractor'
       ]);
+    }
+
+    else if (target === 'all') {
+      return grunt.task.run([
+        'test:server',
+        'test:client',
+        'test:e2e'
+        ]);
     }
 
     else grunt.task.run([

@@ -1,7 +1,6 @@
 describe('Inscription test suit', function() {
 
   beforeEach(function() {
-  	browser.driver.get('about:blank');
   	browser.get('/');
   });
 
@@ -27,14 +26,15 @@ describe('Inscription test suit', function() {
     // Expect to be on the homepage
     //@TODO
     expect(curTitle == browser.getTitle()).toBeFalsy();
-  });*/
+  });
 
   it('should fail to make a new account by writing two different passwords', function() {
+
     // The "Créer un compte" link should be present
     expect(element(by.id('link_make_account')).isDisplayed()).toBeTruthy();
 
     // Clicking it
-    element(by.id('link_make_account').click();
+    element(by.id('link_make_account')).click();
 
     // Filling the formular
     element(by.id('first_name_registration')).sendKeys("Jean");
@@ -51,11 +51,12 @@ describe('Inscription test suit', function() {
   });
 
   it('should fail to make a new account by using an already used mail address', function() {
+
     // The "Créer un compte" link should be present
     expect(element(by.id('link_make_account')).isDisplayed()).toBeTruthy();
 
     // Clicking it
-    element(by.id('link_make_account').click();
+    element(by.id('link_make_account')).click();
 
     // Filling the formular
     element(by.id('first_name_registration')).sendKeys("Jean");
@@ -69,5 +70,5 @@ describe('Inscription test suit', function() {
 
     // Expect an error message
     expect(element(by.id(error_mail_registration)).isDisplayed()).toBeTruthy();
-  });
+  });*/
 });

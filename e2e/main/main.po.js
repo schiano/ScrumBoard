@@ -6,57 +6,127 @@
 'use strict';
 
 var MainPage = function() {
-  this.newMemberBtn = element(by.id('btn_new_user'));
-  this.newUSBtn = element(by.id('new_uss'));
-  this.newProjectBtn = element(by.id('btn_new_project'));
+  var newProjectBtn = element(by.id('btn_new_project'));
 
-  this.deleteMember = function(id) {
-    element(by.id("del_us_"+id)).click();
-  };
+  this.connect = function(name, pass) {
 
-  this.connectWithDefaultUser = function() {
-    // Default user : test@test.com
-    // Password     : test
+    // Filling the mail field
+    var mailField = element(by.id('mail_field_login'));
+    mailField.clear();
+    mailField.sendKeys('test@test.com');
+
+    // Filling the password field
+    var passField = element(by.id('password_field_login'));
+    passField.clear();
+    passField.sendKeys('test');
+
+    // Clicking 'connexion'
+    element(by.id('next_button')).click();
+
+    browser.sleep(3000);
   }
 
-  this.clickAddMember = function() {
-    newMemberBtn.click();
-
-    this.popupNewMember = {
-        email = element(by.id('new_membre_name'));
-        errorEmptyMail = element(by.id('error_mail_empty_user'));
-        errorUnknownUser = element(by.id('error_mail_unknown_user'));
-        cancelBtn = element(by.id('btn_cancel_user_popup'));
-        addBtn = element(by.id('btn_add_user'));
-    };
+  /* POPUP NEW MEMBER */
+  this.setPopupNewMemberEmail = function(name) {
+    element(by.id('new_membre_name')).sendKeys(name);
   };
 
-  this.clickAddUS = function() {
-    newUSBtn.click();
+  this.clickPopupNewMemberCancelButton = function() {
+    element(by.id('btn_cancel_user_popup')).click();
+  };
 
-    this.popupNewUS = {
-        title = element(by.id('new_us_title'));
-        priority = element(by.id('new_us_priority'));
-        difficulty = element(by.id('new_us_difficulty'));
-        error = element(by.id('error_backlogs'));
-        cancelBtn = element(by.id('btn_cancel_backog_popup'));
-        addBtn = element(by.id('btn_add_backlog_popup'));
-    };
+  this.clickPopupNewMemberAddButton = function() {
+    element(by.id('btn_add_user')).click();
+  };
+  /* POPUP NEW MEMBER */
+
+  /* POPUP NEW US */
+  this.setPopupNewUSTitle = function(name) {
+    element(by.id('new_us_title')).sendKeys(name);
+  };
+
+  this.setPopupNewUSSprint = function(name) {
+    element(by.id('new_us_sprint')).sendKeys(name);
+  };
+
+  this.setPopupNewUSOrder = function(name) {
+    element(by.id('new_us_order')).sendKeys(name);
+  };
+
+  this.setPopupNewUSPriority = function(name) {
+    element(by.id('new_us_priority')).sendKeys(name);
+  };
+
+  this.setPopupNewUSDifficulty = function(name) {
+    element(by.id('new_us_difficulty')).sendKeys(name);
+  };
+
+  this.clickPopupNewUSCancelButton = function() {
+    element(by.id('btn_cancel_backlog_popup')).click();
+  };
+
+  this.clickPopupNewUSAddButton = function() {
+    element(by.id('btn_add_backlog_popup')).click();
+  };
+  /* POPUP NEW US */
+
+  /* POPUP NEW Project */
+  this.setPopupNewProjectName = function(name) {
+    element(by.id('new_project_name')).sendKeys(name);
+  };
+
+  this.getPopupNewProjectErrorName = function() {
+    return element(by.id('error_name_project'));
+  };
+
+  this.clickPopupNewProjectCancelButton = function() {
+    element(by.id('btn_cancel_project_popup')).click();
+  };
+
+  this.clickPopupNewProjectAddButton = function() {
+    element(by.id('btn_add_project')).click();
+  };
+  /* POPUP NEW Project */
+
+  this.clickProject = function (id) {
+    // Clicking on the project
+  };
+
+  this.clickTeam = function () {
+    element(by.id('btn-team')).click();
+  };
+
+  this.clickBackLog = function() {
+    element(by.id('btn-backlog')).click();
+  };
+
+  this.clickKanBan = function() {
+    element(by.id('btn-kanban')).click();
+  };
+
+  this.clickPert = function() {
+    element(by.id('btn-pert')).click();
+  };
+
+  this.clickGantt = function() {
+    element(by.id('btn-gantt')).click();
   };
 
   this.clickAddProject = function() {
-    btn_new_project.click();
+    element(by.id('btn_new_project')).click();
+  };
 
-    this.popupNewProject = {
-        errorName = element(by.id('error_name_project'));
-        cancelBtn = element(by.id('btn_cancel_project_popup'));
-        addBtn = element(by.id('btn_add_project_popup'));
+  this.clickAddMember = function() {
+    element(by.id('btn_new_user')).click();
+  };
 
-        setName = function(name) {
-            element(by.id('new_project_name')).sendKeys(name);
-        }
-    }
-  }
+  this.clickDeleteMember = function(id) {
+    element(by.id("del_us_"+id)).click();
+  };
+
+  this.clickAddUS = function() {
+    element(by.id('new_us')).click();
+  };
 };
 
 module.exports = new MainPage();

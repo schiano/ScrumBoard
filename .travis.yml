@@ -1,16 +1,22 @@
+sudo: required
 language: node_js
 node_js:
   - '0.10'
   - '0.11'
 install:
   - npm install -g bower grunt-cli
+  - npm install
   - bower install
+  - ./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update
 before_script:
   - "export DISPLAY=:99.0"
-  - sh -e /etc/init.d/xvfb start
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
   - nohup bash -c "./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager start 2>&1 &"
+  - sleep 5
 script:
-  - grunt travis-protractor
+  - grunt test:e2e
+  - grunt test
 services: mongodb
 notifications:
   slack: cdp-team:iYfuVTrcNZd8vP2G3hhF0dGE

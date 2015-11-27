@@ -8,19 +8,27 @@ exports.config = {
   // than the maximum time your application needs to stabilize between tasks.
   allScriptsTimeout: 110000,
 
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
   // A base URL for your application under test. Calls to protractor.get()
   // with relative paths will be prepended with this.
   baseUrl: 'http://localhost:' + (process.env.PORT || '9000'),
 
   // If true, only chromedriver will be started, not a standalone selenium.
   // Tests for browsers other than chrome will not run.
-  chromeOnly: true,
+  // chromeOnly: true, // DEPRECATED
+  //directConnect: true,
 
   // list of files / patterns to load in the browser
   suites: {
-    main: 'e2e/main/*.spec.js',
-    connexion: 'e2e/connexion/*.spec.js',
-    inscription: 'e2e/inscription/*.spec.js'
+    addMemberToProject: 'e2e/main/addMemberToProject.spec.js',
+    addProject: 'e2e/main/addProject.spec.js',
+    addUserStory: 'e2e/main/addUserStory.spec.js',
+    connexion: 'e2e/connexion_inscription/connexion.spec.js'
+  },
+
+  onPrepare: function() {
+    browser.driver.manage().window().maximize();
   },
 
   // Patterns to exclude.

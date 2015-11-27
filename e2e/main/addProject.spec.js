@@ -4,20 +4,23 @@ describe('Add project Test Suit', function() {
 	var page;
 
 	beforeEach(function () {
-		browser.get('/');
-    co = require('../connexion_inscription/acc.po.js');
-    co.connection('test@test.com', 'test');
-		page = require('./main.po');
-    page.connectWithDefaultUser();
+    browser.driver.get('about:blank')
+    browser.get('/');
+    page = require('./main.po');
+    
 	});
 
 	it('should add a project', function() {
+    page.connect('test@test.com', 'test');
 
+    var nbProjects = element.all(by.css('.project_box')).count().then(function(count) {
+      return count + 1;
+    });
   	page.clickAddProject();
-  	page.setName('Project');
-  	page.addBtn.click();
+  	page.setPopupNewProjectName('Project');
+  	page.clickPopupNewProjectAddButton();
 
   	// The new project should be present.
-  	//@TODO
+  	expect(element.all(by.css('.project_box')).count()).toEqual(nbProjects);
   	});
 });

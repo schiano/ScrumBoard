@@ -4,30 +4,48 @@ describe('Add member to project Test Suit', function() {
 	var page;
 
 	beforeEach(function () {
-		browser.get('/');
-		co = require('../connexion_inscription/acc.po.js');
-		co.connection('test@test.com', 'test');
+    browser.get('/');
 		page = require('./main.po');
-		page.connectWithDefaultUser();
 	});
 
 	it('should add an existing member to the project', function() {
 
-  	page.clickAddMember();
-  	page.email.sendKeys('test@test.com');
-  	page.addBtn.click();
+  	page.connect('test@test.com', 'test');
+    page.clickProject(0);
+    page.clickTeam();
+    page.clickAddMember();
 
-  	// the test@test user should be present.
-  	//@TODO
+    page.setPopupNewMemberEmail('admin@admin.com');
+  	page.clickPopupNewMemberAddButton();
+
+  	// the admin@admin.com user should be present.
+  	//expect(page.getUser('admin@admin.com').isDisplayed()).toBeTruthy();
   	});
+
+  it('should fail by leaving the textbox empty', function() {
+
+    page.connect('test@test.com', 'test');
+    page.clickProject(0);
+    page.clickTeam();
+    page.clickAddMember();
+
+    page.clickPopupNewMemberAddButton();
+
+    // the error message should be present.
+    expect(element(by.id('error_mail_unknown_user')).isDisplayed()).toBeTruthy();
+    });
 
 	it('should fail to add a non-existing member to the project', function() {
 
-  	page.clickAddMember();
-  	page.email.sendKeys('error');
-  	page.addBtn.click();
+  	page.connect('test@test.com', 'test');
+    page.clickProject(0);
+    page.clickTeam();
+    page.clickAddMember();
+
+    page.setPopupNewMemberEmail('error');
+  	page.clickPopupNewMemberAddButton();
 
   	// the error message should be present.
-  	expect(page.errorUnknownUser.isDisplayed()).toBeTruthy();
+  	expect(element(by.id('error_mail_empty_user')).isDisplayed()).toBeTruthy();
   	});
 });
