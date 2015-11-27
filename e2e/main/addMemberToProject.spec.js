@@ -16,7 +16,7 @@ describe('Add member to project Test Suit', function() {
     page.clickAddMember();
 
     page.setPopupNewMemberEmail('admin@admin.com');
-  	page.getPopupNewMemberAddButton.click();
+  	page.clickPopupNewMemberAddButton();
 
   	// the admin@admin.com user should be present.
   	//expect(page.getUser('admin@admin.com').isDisplayed()).toBeTruthy();
@@ -29,7 +29,7 @@ describe('Add member to project Test Suit', function() {
     page.clickTeam();
     page.clickAddMember();
 
-    page.getPopupNewMemberAddButton.click();
+    page.clickPopupNewMemberAddButton();
 
     // the error message should be present.
     expect(element(by.id('error_mail_unknown_user')).isDisplayed()).toBeTruthy();
@@ -43,7 +43,7 @@ describe('Add member to project Test Suit', function() {
     page.clickAddMember();
 
     page.setPopupNewMemberEmail('error');
-  	page.getPopupNewMemberAddButton.click();
+  	page.clickPopupNewMemberAddButton();
 
   	// the error message should be present.
   	expect(element(by.id('error_mail_empty_user')).isDisplayed()).toBeTruthy();
