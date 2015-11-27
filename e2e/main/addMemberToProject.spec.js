@@ -13,8 +13,8 @@ describe('Add member to project Test Suit', function() {
 
 	it('should add an existing member to the project', function() {
 
-  	page.email.sendKeys('admin@admin.com');
-  	page.addBtn.click();
+  	page.popupNewMember.email.sendKeys('admin@admin.com');
+  	page.popupNewMember.addBtn.click();
 
   	// the admin@admin.com user should be present.
   	expect(page.getUser('admin@admin.com').isDisplayed()).toBeTruthy();
@@ -22,7 +22,7 @@ describe('Add member to project Test Suit', function() {
 
   it('should fail by leaving the textbox empty', function() {
 
-    page.addBtn.click();
+    page.popupNewMember.addBtn.click();
 
     // the error message should be present.
     expect(page.errorUnknownUser.isDisplayed()).toBeTruthy();
@@ -30,8 +30,8 @@ describe('Add member to project Test Suit', function() {
 
 	it('should fail to add a non-existing member to the project', function() {
 
-  	page.email.sendKeys('error');
-  	page.addBtn.click();
+  	page.popupNewMember.email.sendKeys('error');
+  	page.popupNewMember.addBtn.click();
 
   	// the error message should be present.
   	expect(page.errorEmptyMail.isDisplayed()).toBeTruthy();
