@@ -6,11 +6,10 @@
 'use strict';
 
 var MainPage = function() {
-  this.newProjectBtn = element(by.id('btn_new_project'));
+  var newProjectBtn = element(by.id('btn_new_project'));
 
-  this.connectWithDefaultUser = function() {
-    browser.get('/');
-    
+  this.connect = function(name, pass) {
+
     // Filling the mail field
     var mailField = element(by.id('mail_field_login'));
     mailField.clear();
@@ -24,80 +23,122 @@ var MainPage = function() {
     // Clicking 'connexion'
     element(by.id('next_button')).click();
 
-    browser.sleep(5000);
+    browser.sleep(3000);
   }
+
+  /* POPUP NEW MEMBER */
+  this.setPopupNewMemberEmail = function(name) {
+    element(by.id('new_membre_name')).sendKeys(name);
+  };
+
+  this.getPopupNewMemberErrorEmptyMail = function() {
+    return element(by.id('error_mail_empty_user'));
+  };
+
+  this.getPopupNewMemberErrorUnknownUser = function() {
+    return element(by.id('error_mail_unknown_user'));
+  };
+
+  this.getPopupNewMemberCancelBtn = function() {
+    return element(by.id('btn_cancel_user_popup'));
+  };
+
+  this.getPopupNewMemberAddBtn = function() {
+    return element(by.id('btn_add_user'));
+  };
+  /* POPUP NEW MEMBER */
+
+  /* POPUP NEW US */
+  this.setPopupNewUSTitle = function(name) {
+    element(by.id('new_us_title')).sendKeys(name);
+  };
+
+  this.setPopupNewUSSprint = function(name) {
+    element(by.id('new_us_sprint')).sendKeys(name);
+  };
+
+  this.setPopupNewUSOrder = function(name) {
+    element(by.id('new_us_order')).sendKeys(name);
+  };
+
+  this.setPopupNewUSPriority = function(name) {
+    element(by.id('new_us_priority')).sendKeys(name);
+  };
+
+  this.setPopupNewUSDifficulty = function(name) {
+    element(by.id('new_us_difficulty')).sendKeys(name);
+  };
+
+  this.getPopupNewUSError = function() {
+    return element(by.id('error_backlog'));
+  };
+
+  this.getPopupNewUSCancelButton = function() {
+    return element(by.id('btn_cancel_backlog_popup'));
+  };
+
+  this.getPopupNewUSAddButton = function() {
+    return element(by.id('btn_add_backlog_popup'));
+  };
+  /* POPUP NEW US */
+
+  /* POPUP NEW Project */
+  this.setPopupNewProjectName = function(name) {
+    element(by.id('new_project_name')).sendKeys(name);
+  };
+
+  this.getPopupNewProjectErrorName = function() {
+    return element(by.id('error_name_project'));
+  };
+
+  this.getPopupNewProjectCancelButton = function() {
+    return element(by.id('btn_cancel_project_popup'));
+  };
+
+  this.getPopupNewProjectAddButton = function() {
+    return element(by.id('btn_add_project'));
+  };
+  /* POPUP NEW Project */
 
   this.clickProject = function (id) {
     // Clicking on the project
+  };
 
-    this.clickTeam = function () {
-      element(by.id('btn-team')).click();
-      this.newMemberBtn = element(by.id('btn_new_user'));
+  this.clickTeam = function () {
+    element(by.id('btn-team')).click();
+  };
 
-      this.deleteMember = function(id) {
-      element(by.id("del_us_"+id)).click();
-      };
+  this.clickBackLog = function() {
+    element(by.id('btn-backlog')).click();
+  };
 
-      this.clickAddMember = function() {
-        newMemberBtn.click();
+  this.clickKanBan = function() {
+    element(by.id('btn-kanban')).click();
+  };
 
-        this.popupNewMember = {
-            email = element(by.id('new_membre_name'));
-            errorEmptyMail = element(by.id('error_mail_empty_user'));
-            errorUnknownUser = element(by.id('error_mail_unknown_user'));
-            cancelBtn = element(by.id('btn_cancel_user_popup'));
-            addBtn = element(by.id('btn_add_user'));
-        };
-      };
-    };
+  this.clickPert = function() {
+    element(by.id('btn-pert')).click();
+  };
 
-    this.clickBackLog = function() {
-      element(by.id('btn-backlog')).click();
-      this.newUSBtn = element(by.id('new_us'));
-
-      this.clickAddUS = function() {
-        newUSBtn.click();
-
-        this.popupNewUS = {
-            title = element(by.id('new_us_title'));
-            order = element(by.id('new_us_order'));
-            priority = element(by.id('new_us_priority'));
-            difficulty = element(by.id('new_us_difficulty'));
-            sprint = element(by.id('new_us_sprint'));
-            error = element(by.id('error_backlog'));
-            cancelBtn = element(by.id('btn_cancel_backlog_popup'));
-            addBtn = element(by.id('btn_add_backlog_popup'));
-        };
-      };
-    }
-
-    this.clickKanBan = function() {
-      element(by.id('btn-kanban')).click();
-    }
-
-    this.clickPert = function() {
-      element(by.id('btn-pert')).click();
-    }
-
-    this.clickGantt = function() {
-      element(by.id('btn-gantt')).click();
-    }
-  }
-  
+  this.clickGantt = function() {
+    element(by.id('btn-gantt')).click();
+  };
 
   this.clickAddProject = function() {
-    btn_new_project.click();
+    element(by.id('btn_new_project')).click();
+  };
 
-    this.popupNewProject = {
-        errorName = element(by.id('error_name_project'));
-        cancelBtn = element(by.id('btn_cancel_project_popup'));
-        addBtn = element(by.id('btn_add_project_popup'));
+  this.clickAddMember = function() {
+    element(by.id('btn_new_user')).click();
+  };
 
-        setName = function(name) {
-            element(by.id('new_project_name')).sendKeys(name);
-        }
-    }
-  }
+  this.clickDeleteMember = function(id) {
+    element(by.id("del_us_"+id)).click();
+  };
+
+  this.clickAddUS = function() {
+    element(by.id('new_us')).click();
+  };
 };
 
 module.exports = new MainPage();

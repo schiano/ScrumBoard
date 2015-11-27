@@ -4,7 +4,8 @@ describe('Add user story Test Suit', function() {
 	var page;
 
 	beforeEach(function () {
-		page = require('./main.po');
+    browser.get('/');
+    page = require('./main.po');
     page.connectWithDefaultUser();
     page.clickProject(0);
     page.clickBackLog();
@@ -13,144 +14,154 @@ describe('Add user story Test Suit', function() {
 
 	it('should add a user story', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('1');
-    page.popupNewUS.priority.sendKeys('1');
-    page.popupNewUS.difficulty.sendKeys('2');
-    page.popupNewUS.sprint.sendKeys('2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('1');
+    page.setPopupNewUSPriority('1');
+    page.setPopupNewUSDifficulty('2');
+    page.setPopupNewUSSprint('2');
 
 
-  	page.popupNewUS.addBtn.click();
+  	page.getPopupNewUSAddButton.click();
 
   	// The new project should be present.
   	//@TODO
   	});
 
-  it('should fail to add a user story : negativ order', function() {
+  it('should fail to add a user story : negative order', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('-1');
-    page.popupNewUS.priority.sendKeys('1');
-    page.popupNewUS.difficulty.sendKeys('2');
-    page.popupNewUS.sprint.sendKeys('2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('-1');
+    page.setPopupNewUSPriority('1');
+    page.setPopupNewUSDifficulty('2');
+    page.setPopupNewUSSprint('2');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
   it('should fail to add a user story : text order', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('fail');
-    page.popupNewUS.priority.sendKeys('1');
-    page.popupNewUS.difficulty.sendKeys('2');
-    page.popupNewUS.sprint.sendKeys('2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('fail');
+    page.setPopupNewUSPriority('1');
+    page.setPopupNewUSDifficulty('2');
+    page.setPopupNewUSSprint('2');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
-  it('should fail to add a user story : negativ priority', function() {
+  it('should fail to add a user story : negative priority', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('1');
-    page.popupNewUS.priority.sendKeys('-1');
-    page.popupNewUS.difficulty.sendKeys('2');
-    page.popupNewUS.sprint.sendKeys('2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('1');
+    page.setPopupNewUSPriority('-1');
+    page.setPopupNewUSDifficulty('2');
+    page.setPopupNewUSSprint('2');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
   it('should fail to add a user story : text priority', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('1');
-    page.popupNewUS.priority.sendKeys('fail');
-    page.popupNewUS.difficulty.sendKeys('2');
-    page.popupNewUS.sprint.sendKeys('2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('1');
+    page.setPopupNewUSPriority('fail');
+    page.setPopupNewUSDifficulty('2');
+    page.setPopupNewUSSprint('2');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
-  it('should fail to add a user story : negativ difficulty', function() {
+  it('should fail to add a user story : negative difficulty', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('1');
-    page.popupNewUS.priority.sendKeys('1');
-    page.popupNewUS.difficulty.sendKeys('-2');
-    page.popupNewUS.sprint.sendKeys('2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('1');
+    page.setPopupNewUSPriority('1');
+    page.setPopupNewUSDifficulty('-2');
+    page.setPopupNewUSSprint('2');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
   it('should fail to add a user story : text difficulty', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('1');
-    page.popupNewUS.priority.sendKeys('1');
-    page.popupNewUS.difficulty.sendKeys('fail');
-    page.popupNewUS.sprint.sendKeys('2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('1');
+    page.setPopupNewUSPriority('1');
+    page.setPopupNewUSDifficulty('fail');
+    page.setPopupNewUSSprint('2');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
-  it('should fail to add a user story : negativ sprint', function() {
+  it('should fail to add a user story : negative sprint', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('1');
-    page.popupNewUS.priority.sendKeys('1');
-    page.popupNewUS.difficulty.sendKeys('2');
-    page.popupNewUS.sprint.sendKeys('-2');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('1');
+    page.setPopupNewUSPriority('1');
+    page.setPopupNewUSDifficulty('2');
+    page.setPopupNewUSSprint('-2');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
   it('should fail to add a user story : text sprint', function() {
 
-    page.popupNewUS.title.sendKeys('US');
-    page.popupNewUS.order.sendKeys('1');
-    page.popupNewUS.priority.sendKeys('1');
-    page.popupNewUS.difficulty.sendKeys('2');
-    page.popupNewUS.sprint.sendKeys('fail');
+    page.connect('test@test.com', 'test');
+    page.setPopupNewUSTitle('US');
+    page.setPopupNewUSOrder('1');
+    page.setPopupNewUSPriority('1');
+    page.setPopupNewUSDifficulty('2');
+    page.setPopupNewUSSprint('fail');
 
 
-    page.popupNewUS.addBtn.click();
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 
   it('should fail to add a user story : everything blank', function() {
 
-    page.popupNewUS.addBtn.click();
+    page.connect('test@test.com', 'test');
+    page.getPopupNewUSAddButton.click();
 
     // Expect an error
-    expect(page.popupNewUS.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.getPopupNewUSError.isDisplayed()).toBeTruthy();
     });
 });
