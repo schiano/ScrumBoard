@@ -4,18 +4,20 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var GanttSchema = new Schema({
-  timeUnit: {
-	  type: Number, required: false
+  developerColors: {
+	  type:[{
+		 _id: false,
+		 developerId: String,
+		 colorHex: String 
+	  }]  
   },
-  column: {
+  entries: {
 	  type: [{
 		  _id: false,
-		  columnName: String,
-		  userTasks: [{
-			  _id: false,
-			  userId: String,
-			  taskId: String
-		  }]
+		  taskId: String,
+		  startDate: Date,
+		  endDate: Date,
+		  developerId: String
 	  }], required: true
   }
 });
