@@ -10,11 +10,12 @@ describe('Add project Test Suit', function() {
 
 	it('should add a project', function() {
 
+    var projects = element.all(by.css('.project_box')).count();
   	page.clickAddProject();
   	page.setName('Project');
   	page.addBtn.click();
 
   	// The new project should be present.
-  	//@TODO
+  	expect(element.all(by.css('.project_box')).count()).toEqual(projects+1);
   	});
 });
