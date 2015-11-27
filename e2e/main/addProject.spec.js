@@ -18,7 +18,7 @@ describe('Add project Test Suit', function() {
     });
   	page.clickAddProject();
   	page.setPopupNewProjectName('Project');
-  	page.getPopupNewProjectAddButton().click();
+  	page.clickPopupNewProjectAddButton();
 
   	// The new project should be present.
   	expect(element.all(by.css('.project_box')).count()).toEqual(nbProjects);
