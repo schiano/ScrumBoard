@@ -25,7 +25,7 @@ describe('Add member to project Test Suit', function() {
     page.popupNewMember.addBtn.click();
 
     // the error message should be present.
-    expect(page.errorUnknownUser.isDisplayed()).toBeTruthy();
+    expect(page.popupNewMember.errorUnknownUser.isDisplayed()).toBeTruthy();
     });
 
 	it('should fail to add a non-existing member to the project', function() {
@@ -34,6 +34,6 @@ describe('Add member to project Test Suit', function() {
   	page.popupNewMember.addBtn.click();
 
   	// the error message should be present.
-  	expect(page.errorEmptyMail.isDisplayed()).toBeTruthy();
+  	expect(page.popupNewMember.errorEmptyMail.isDisplayed()).toBeTruthy();
   	});
 });

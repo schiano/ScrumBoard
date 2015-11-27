@@ -21,8 +21,10 @@ exports.config = {
 
   // list of files / patterns to load in the browser
   suites: {
-    //main: 'e2e/main/*.spec.js',
-    connexion: 'e2e/connexion_inscription/connexion.spec.js',
+    addMemberToProject: 'e2e/main/addMemberToProject.spec.js',
+    addProject: 'e2e/main/addProject.spec.js',
+    addUserStory: 'e2e/main/addUserStory.spec.js',
+    connexion: 'e2e/connexion_inscription/connexion.spec.js'
   },
 
   onPrepare: function() {
