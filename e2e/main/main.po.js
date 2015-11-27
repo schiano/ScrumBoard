@@ -31,20 +31,12 @@ var MainPage = function() {
     element(by.id('new_membre_name')).sendKeys(name);
   };
 
-  this.getPopupNewMemberErrorEmptyMail = function() {
-    return element(by.id('error_mail_empty_user'));
+  this.clickPopupNewMemberCancelButton = function() {
+    element(by.id('btn_cancel_user_popup')).click();
   };
 
-  this.getPopupNewMemberErrorUnknownUser = function() {
-    return element(by.id('error_mail_unknown_user'));
-  };
-
-  this.getPopupNewMemberCancelBtn = function() {
-    return element(by.id('btn_cancel_user_popup'));
-  };
-
-  this.getPopupNewMemberAddBtn = function() {
-    return element(by.id('btn_add_user'));
+  this.clickPopupNewMemberAddButton = function() {
+    element(by.id('btn_add_user')).click();
   };
   /* POPUP NEW MEMBER */
 
@@ -69,16 +61,12 @@ var MainPage = function() {
     element(by.id('new_us_difficulty')).sendKeys(name);
   };
 
-  this.getPopupNewUSError = function() {
-    return element(by.id('error_backlog'));
+  this.clickPopupNewUSCancelButton = function() {
+    element(by.id('btn_cancel_backlog_popup')).click();
   };
 
-  this.getPopupNewUSCancelButton = function() {
-    return element(by.id('btn_cancel_backlog_popup'));
-  };
-
-  this.getPopupNewUSAddButton = function() {
-    return element(by.id('btn_add_backlog_popup'));
+  this.clickPopupNewUSAddButton = function() {
+    element(by.id('btn_add_backlog_popup')).click();
   };
   /* POPUP NEW US */
 
@@ -91,12 +79,12 @@ var MainPage = function() {
     return element(by.id('error_name_project'));
   };
 
-  this.getPopupNewProjectCancelButton = function() {
-    return element(by.id('btn_cancel_project_popup'));
+  this.clickPopupNewProjectCancelButton = function() {
+    element(by.id('btn_cancel_project_popup')).click();
   };
 
-  this.getPopupNewProjectAddButton = function() {
-    return element(by.id('btn_add_project'));
+  this.clickPopupNewProjectAddButton = function() {
+    element(by.id('btn_add_project')).click();
   };
   /* POPUP NEW Project */
 
