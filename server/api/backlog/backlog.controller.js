@@ -30,11 +30,12 @@ exports.update = function(req, res) {
 	  delete req.body.id;
   }
   var p = new Backlog(req.body);
-  Backlog.findOneAndUpdate(req.params.id, p, {upsert: true, new: true}, function(err, doc){
+  Backlog.findOneAndUpdate(req.params.id, p, {upsert: true}, function(err, doc){
+	  p._id = doc._id;
 	  if(err){
 		  return handleError(res, err);
 	  }
-	  return res.status(200).json(doc);
+	  return res.status(200).json(p);
   });
 };
 
