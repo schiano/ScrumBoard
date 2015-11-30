@@ -20,7 +20,7 @@ var ProjectSchema = new Schema({
   },
   members: {
 	  type: [{
-		  _id:false, 
+		  _id:false,
 		  userId: {type: String, required: true}, 
 		  name: {type: String, required: true}, 
 		  canEdit: {type: Boolean, required: true}
