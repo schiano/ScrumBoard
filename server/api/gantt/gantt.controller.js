@@ -26,15 +26,15 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  gantt.findById(req.params.id, function (err, gantt) {
-    if (err) { return handleError(res, err); }
-    if(!gantt) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(gantt, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(gantt);
-    });
+  if(req.body._id) {
+	  delete req.body.id;
+  }
+  var p = new gantt(req.body);
+  gantt.findOneAndUpdate(req.params.id, p, {upsert: true, new: true}, function(err, doc){
+	  if(err){
+		  return handleError(res, err);
+	  }
+	  return res.status(200).json(doc);
   });
 };
 

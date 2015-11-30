@@ -26,15 +26,15 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Backlog.findById(req.params.id, function (err, backlog) {
-    if (err) { return handleError(res, err); }
-    if(!backlog) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(backlog, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(backlog);
-    });
+  if(req.body._id) {
+	  delete req.body.id;
+  }
+  var p = new Backlog(req.body);
+  Backlog.findOneAndUpdate(req.params.id, p, {upsert: true, new: true}, function(err, doc){
+	  if(err){
+		  return handleError(res, err);
+	  }
+	  return res.status(200).json(doc);
   });
 };
 
