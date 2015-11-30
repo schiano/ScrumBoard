@@ -27,7 +27,8 @@ var TaskSchema = new Schema({
   }, 
   status: {
 	  type: Number, required: true
-  }
+  },
+  validationDate: Date
 });
 
 module.exports = mongoose.model('Task', TaskSchema);

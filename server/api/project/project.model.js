@@ -37,7 +37,9 @@ var ProjectSchema = new Schema({
 			_id:false,
 		  	sprintNumber: Number,
 		  	ganttId: String,
-		  	tasks: [String]
+		  	tasks: [String],
+		  	startDate: Date,
+		  	endDate: Date
 		  }
 	  ]
   },
