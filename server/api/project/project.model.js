@@ -20,7 +20,7 @@ var ProjectSchema = new Schema({
   },
   members: {
 	  type: [{
-		  _id:false, 
+		  _id:false,
 		  userId: {type: String, required: true}, 
 		  name: {type: String, required: true}, 
 		  canEdit: {type: Boolean, required: true}
@@ -36,7 +36,10 @@ var ProjectSchema = new Schema({
 		  {
 			_id:false,
 		  	sprintNumber: Number,
-		  	tasks: [String]
+		  	ganttId: String,
+		  	tasks: [String],
+		  	startDate: Date,
+		  	endDate: Date
 		  }
 	  ]
   },

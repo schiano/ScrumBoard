@@ -1,27 +1,27 @@
 'use strict';
 
 var _ = require('lodash');
-var Task = require('./task.model');
+var gantt = require('./gantt.model');
 
 exports.index = function(req, res) {
-  Task.find(function (err, tasks) {
+  gantt.find(function (err, gantts) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(tasks);
+    return res.status(200).json(gantts);
   });
 };
 
 exports.show = function(req, res) {
-  Task.findById(req.params.id, function (err, task) {
+  gantt.findById(req.params.id, function (err, gantt) {
     if(err) { return handleError(res, err); }
-    if(!task) { return res.status(404).send('Not Found'); }
-    return res.json(task);
+    if(!gantt) { return res.status(404).send('Not Found'); }
+    return res.json(gantt);
   });
 };
 
 exports.create = function(req, res) {
-  Task.create(req.body, function(err, task) {
+  gantt.create(req.body, function(err, gantt) {
     if(err) { return handleError(res, err); }
-    return res.status(201).json(task);
+    return res.status(201).json(gantt);
   });
 };
 
@@ -29,8 +29,8 @@ exports.update = function(req, res) {
   if(req.body._id) {
 	  delete req.body.id;
   }
-  var p = new Task(req.body);
-  Task.findOneAndUpdate(req.params.id, p, {upsert: true}, function(err, doc){
+  var p = new gantt(req.body);
+  gantt.findOneAndUpdate(req.params.id, p, {upsert: true}, function(err, doc){
 	  p._id = doc._id;
 	  if(err){
 		  return handleError(res, err);
@@ -40,10 +40,10 @@ exports.update = function(req, res) {
 };
 
 exports.destroy = function(req, res) {
-  Task.findById(req.params.id, function (err, task) {
+  gantt.findById(req.params.id, function (err, gantt) {
     if(err) { return handleError(res, err); }
-    if(!task) { return res.status(404).send('Not Found'); }
-    task.remove(function(err) {
+    if(!gantt) { return res.status(404).send('Not Found'); }
+    gantt.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });
